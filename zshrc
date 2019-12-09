@@ -5,6 +5,7 @@ export DOTFILES=~/dot
 source ${DOTFILES}/zsh/suggestions.zsh
 source ${DOTFILES}/zsh/highlight.zsh
 source ${DOTFILES}/zlerc # terminal cursor keybindings
+source ${DOTFILES}/env # tokens
 
 export HISTFILE=~/.hist/zsh
 HISTSIZE=10000
