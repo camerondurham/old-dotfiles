@@ -1,0 +1,162 @@
+#!/usr/bin/env zsh
+
+if [[ ! $(uname -s) =~ (Darwin|Linux) ]]; then
+	echo "Unsupported operating system for $1(:A)" >&2
+	exit 1
+fi
+
+# Save dot as the name of the dotfiles directory
+export dot=~/dot
+
+# Exit as soon as an error is encountered
+set -e
+
+# Silence login messages
+rm -rf ~/.hushlogin && touch ~/.hushlogin
+
+# Function used to link dotfiles
+update () {
+
+  # Path to the file in our dotfiles
+  local file=$(realpath "$1")
+
+  # Path to the location we'd like a link to exist
+  local prev=$(realpath "$2")
+
+  # Return an error if the dotfile does not exist
+  if [[ ! -e ${file} ]]; then
+    echo "update() - error: file ${file} not found" >&2
+    return 1
+  fi
+
+  # Create the link if no file exists at the destination
+  if [[ ! -e ${prev} ]]; then
+    ln -s ${file} ${prev}
+    return 0
+  fi
+
+  # Create a link if the pre-existing file isn't already the dotfile
+  if [[ ${prev} != ${file} ]]; then
+    if [[ ! -d ${prev} && ! -d ${file} ]]; then
+    # If the destination file has the same content as the dotfile
+      if [[ $(cmp -s ${file} ${prev})$? -eq 0 ]]; then
+        # Then don't make a backup
+        ln -s ${file} ${prev}
+      # If the destination file has different contents than the dotfile
+      elif [[ $(cmp -s ${file} ${prev})$? -eq 1 ]]; then
+        # Then make a backup
+        ln -sb ${file} ${prev}
+        echo "Updated ${prev}"
+      fi
+    fi
+  fi
+
+  # Added by Cameron for plugin links until I find how to append to runtimepath
+  ln -s ~/dot/nvim/pack/git-plugins ~/.local/share/nvim/site/pack
+  return 0
+}
+
+
+if [[ $(uname -s) == Darwin ]]; then
+  # Sync any files installed with Homebrew
+  # Ensure the user isn't root
+  if [[ $ID -ne 0 ]]; then
+    # Check that homebrew is installed
+		if [[ -x $(whence -p brew) ]]; then
+      url="https://raw.githubusercontent.com/Homebrew/install/master/install"
+      ruby -e "$(curl -fsSL ${url})"
+    fi
+    # Run the init file, ~/dot/bin/brew-init
+    brew init
+    # Update ruby gems
+    gem update --system --silent
+  fi
+  if [[ "${SHELL}" != /usr/local/bin/zsh ]]; then
+    chsh -s /usr/local/bin/zsh
+  fi
+elif [[ $(uname -s) == Linux ]]; then
+  if [[ $(hash hub &> /dev/null)$? -ne 0 ]]; then
+    sudo snap install hub --classic
+  fi
+  if [[ "${SHELL}" != /bin/zsh ]]; then
+    chsh -s /bin/zsh
+  fi
+else
+  echo "Error: Operating System undefined for this script." >&2
+  exit 1
+fi
+
+# Save a shortcut to this file, call it '.init'
+update "${dot}/hooks/post-merge" ~/.init
+
+# Remove .bash_profile .bash_login and .bash_history
+rm -rf ~/.bash_{"profile","history","login","sessions"}
+
+# Link files to home directory
+files=(
+  "bashrc"
+  "config"
+  "nvim"
+  "local"
+  "gdbinit"
+  "inputrc"
+  "irbrc"
+  "profile"
+  "pylintrc"
+  "shrc"
+  "vimrc"
+  "zlerc"
+  "zprofile"
+  "zshenv"
+  "zshrc"
+)
+
+for file in "${files[@]}"; do
+  update ${dot}/${file} ~/.${file}
+done
+
+# Link 'git' files to home directory
+for file in ${dot}/git/*; do
+  update ${file} ~/.${file##*\/}
+done
+
+# Link 'zsh' directory to the home directory
+mkdir -p ~/.zsh
+for file in ${dot}/zsh/*; do
+  update ${file} ~/.zsh/${file##*\/}
+done
+
+# Link 'gpg' files to 'gpg' directory
+mkdir -p ~/.gpg
+for file in ${dot}/gpg/*; do
+  update ${file} ~/.gpg/${file##*\/}
+done
+
+# Link 'ssh' files to '.ssh' directory
+mkdir -p ~/.ssh
+for file in ${dot}/ssh/*; do
+  update ${file} ~/.ssh/${file##*\/}
+done
+
+mkdir -p ~/.aws
+for file in ${dot}/aws/*; do
+  update ${file} ~/.aws/${file##*\/}
+done
+
+# update ${dot}/python/config ~/.pyrc
+
+mkdir -p ~/.jupyter/custom
+update ${dot}/jupyter/config ~/.jptrc
+update ${dot}/jupyter/custom/custom.css ~/.jupyter/custom/custom.css
+
+mkdir -p ~/.jupyter
+update ${dot}/jupyter/config ~/.jupyter/jupyter_notebook_config.py
+
+# Customize vim plugins
+if [[ $(realpath ~/.vim) != $(realpath ${dot}/vim) ]]; then
+  ln -sb ~/dot/vim ~/.vim
+fi
+
+mkdir -p ~/.hist/vim
+
+set +e

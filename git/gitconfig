@@ -1,0 +1,49 @@
+# This is Git's per-user configuration file.
+[user]
+  name = Cameron Durham
+  email = camerondurham@users.noreply.github.com
+  signingkey = "8275A77226E2BB73"
+[core]
+  excludesfile = ~/.gitignore
+  editor = code --wait
+  hooksPath = hooks
+[commit]
+  gpgsign = true
+[gpg]
+  program = gpg
+[credential]
+  helper = osxkeychain
+[merge]
+  # tool = vimdiff
+  tool = codemerge
+  guitool = codemerge
+  conflictstyle = merge
+[mergetool "codemerge"]
+  cmd = code --wait --diff $MERGED
+  trustexitcode = true
+  keepbackup = false
+[rerere]
+  enabled = 1
+[diff]
+  tool = codediff
+  # tool = vimdiff
+[difftool "codediff"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+[hub]
+  protocol = ssh
+  host = github.com
+[alias]
+  unstage = reset HEAD
+  stage = add
+  graph = log --graph
+[blame]
+  date = iso-local
+[log]
+  date = iso-local
+[format]
+  pretty = "%x1b[1;33m%h %x1b[0;34m[%an]%x1b[0m: %x1b[4;3m%s%n%+b"
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true

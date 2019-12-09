@@ -1,0 +1,9 @@
+#!/bin/bash
+s_dir="$HOME/.templates"
+g_repo="camerondurham.github.io"
+if [[ $# < 1 ]]; then title="default"; else title="$1"; fi
+post_day=$(date +%Y-%m-%d)
+post_file="$post_day-$title.md"
+t_dir="$HOME/$g_repo/_posts"
+cp "$s_dir/post" "$t_dir/$post_file"
+vim "$t_dir/$post_file"

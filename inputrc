@@ -1,0 +1,55 @@
+$include /etc/inputrc
+
+# [ Enable vi mode ]
+set editing-mode vi
+# Have tab cycle through options
+# Ignore case when tab cycling
+set completion-ignore-case on
+# Colorful tab completion
+set colored-stats on
+# List completions immediately if multiple options
+set show-all-if-ambiguous on
+# List full completions immediately if no partial completion
+set show-all-if-unmodified off
+# Mark symlinked directories with a `/` like normal files
+set mark-symlinked-directories on
+# Color the common prefix
+set colored-completion-prefix on
+# Immediately begin cycling through menu options
+set menu-complete-display-prefix on 
+# Show which mode I am using
+set show-mode-in-prompt on
+# Disable the bell
+set bell-style none
+set keymap vi-command
+# these are for vi-command mode
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+j: history-search-forward
+k: history-search-backward
+set keymap vi-insert
+# these are for vi-insert mode
+control-a: beginning-of-line
+control-e: end-of-line
+control-b: backward-char
+control-f: forward-char
+control-p: previous-history
+control-n: next-history
+control-k: unix-line-discard
+control-t: transpose-chars
+control-i: menu-complete
+escape-control-i: menu-complete-backward
+
+"\e[t": transpose-words
+"\e[u": upcase-word
+"\e[l": downcase-word
+"\e[c": capitalize-word
+"\e[.": yank-last-arg
+"\e[f": forward-word
+"\e[b": backward-word
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+# custom exit vi insert-mode
+"\x5cj": "\x1bl" 
+set vi-ins-mode-string "\1\x1b[1;34m\2"
+set vi-cmd-mode-string "\1\x1b[1;32m\2"

@@ -1,0 +1,231 @@
+#!/usr/bin/env bash
+
+# Exit as soon as an error is encountered
+set -e
+# Print each line as it is being executed
+set -o xtrace\
+
+# [Finder]
+# ========
+
+# Disable animation when opening the Info view in Finder
+defaults write com.apple.finder DisableAllAnimations -bool true
+# Display full POSIX path as Finder window title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+# Add a "Quit Finder" command to the Finder menu
+defaults write com.apple.finder QuitMenuItem -bool true
+# Automatically stop previews when scrolling
+defaults write com.apple.finder AutoStopWhenScrollingOffBounds -bool true
+# Automatically stop QuickLook when user switches active application
+defaults write com.apple.finder QLHidePanelOnDeactivate -bool true
+# Show size column in search results
+defaults write com.apple.finder SearchViewSettings.ListViewSettings.columns.size.visible -bool true
+# Automatically stop previews when selection changes
+defaults write com.apple.finder AutoStopWhenSelectionChanges -bool true
+# When performing a search, search the current folder by default
+defaults write com.apple.finder FXDefaultSearchScope -string 'SCcf'
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+# Disable the warning when removing from iCloud
+defaults write com.apple.finder FXEnableRemoveFromICloudDriveWarning -bool false
+# Don't open new finder windows in the same tab
+defaults write com.apple.finder FinderSpawnTab -bool false
+# Hide the path bar in Finder
+defaults write com.apple.finder ShowPathbar -bool false
+# Hide the status bar in Finder
+defaults write com.apple.finder ShowStatusBar -bool false
+# Enable text selection in quick look windows
+defaults write com.apple.finder QLEnableTextSelection -bool true
+# Hide desktop icons completely
+defaults write com.apple.finder CreateDesktop -bool false
+# Disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# [Mail]
+# =============
+
+# Disable inline attachments (just show the icons)
+defaults write com.appple.mail DisableInlineAttachmentViewing -bool true
+# Disable animation for replying to mail
+defaults write com.apple.mail DisableReplyAnimations -bool true
+# Disable animation for sending mail
+defaults write com.apple.mail DisableSendAnimations -bool true
+# Prefer plain-text when drafting emails
+defaults write com.apple.mail PreferPlainText -bool true
+# Don't include original message in replies
+defaults write com.apple.mail AlwaysIncludeOriginalMessage -bool false
+defaults write com.apple.mail AutoReplyFormat -bool false
+# Show most recent reply in email chain at the top
+defaults write com.apple.mail ConversationViewSortDescending -bool true
+defaults write com.apple.mail ConversationViewMarkAllAsRead -bool true
+
+# [Safari]
+# ========
+
+# Privacy: don’t send search queries to Apple
+defaults write com.apple.safari UniversalSearchEnabled -bool false
+defaults write com.apple.safari SuppressSearchSuggestions -bool true
+# Include the develop menu for Safari (inspect element, etc.)
+defaults write com.apple.safari IncludeDevelopMenu -bool true
+# Disable the delay when rendering a web page in safari
+defaults write com.apple.safari WebKitInitialTimedLayoutDelay 0.25
+
+# [Terminal]
+# ==========
+
+# Only use UTF-8 in Terminal.app
+defaults write -app Terminal StringEncodings -array 4
+
+# [TextEdit]
+# =========
+
+# Use plain text mode for new TextEdit documents
+defaults write -app TextEdit RichText -int 0
+# Open files using UTF-8 encoding
+defaults write -app TextEdit PlainTextEncoding -int 4
+# Write files using UTF-8 encoding
+defaults write -app TextEdit PlainTextEncodingForWrite -int 4
+
+# [Photos]
+# ========
+
+# Prevent Photos from opening automatically when devices are plugged in
+defaults write com.apple.imagecapture disableHotPlug -bool true
+
+# [Dock]
+# Wipe all current app icons from the Dock
+defaults write com.apple.dock persistent-apps -array
+# Show only currently open apps in the Dock
+defaults write com.apple.dock static-only -bool true
+# Minimize apps into their dock icon
+defaults write com.apple.dock minimize-to-application -bool true
+# Don’t show Dashboard as a Space
+defaults write com.apple.dock dashboard-in-overlay -bool true
+# Group windows by application in Mission Control
+defaults write com.apple.dock expose-group-by-app -bool true
+# Use the shortest minimize animation
+defaults write com.apple.dock mineffect -string scale
+# Disable animation when launching an application from the dock
+defaults write com.apple.dock launchanim -bool false
+# Automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
+
+
+# [.DS_Store]
+# ===========
+
+# Disable .DS_Store files
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# Delete all existing .DS_Store files
+find ~ -type f -name '.DS_Store' -delete
+
+
+# [Bluetooth]
+# ===========
+
+# Maximize audio quality sent to bluetooth speakers
+defaults write com.apple.BluetoothAudioAgent 'Apple Bitpool Max (editable)' 80
+defaults write com.apple.BluetoothAudioAgent 'Apple Bitpool Min (editable)' 80
+defaults write com.apple.BluetoothAudioAgent 'Apple Initial Bitpool (editable)' 80
+defaults write com.apple.BluetoothAudioAgent 'Apple Initial Bitpool Min (editable)' 80
+defaults write com.apple.BluetoothAudioAgent 'Negotiated Bitpool' 80
+defaults write com.apple.BluetoothAudioAgent 'Negotiated Bitpool Max' 80
+defaults write com.apple.BluetoothAudioAgent 'Negotiated Bitpool Min' 80
+
+# Enable press-and-hold to insert multiple keys on all apps, and set the pace
+defaults write -g ApplePressAndHoldEnabled -bool false
+# Set the key-repeat rate to 30ms
+defaults write -g KeyRepeat -int 2
+# Set the delay until keys repeat to 375ms
+defaults write -g InitialKeyRepeat -int 25
+
+# [Autocorrect]
+# =============
+
+# Disable auto-correct
+defaults write -g WebAutomaticTextReplacementEnabled -bool false
+defaults write -g NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write -g NSAutomaticDashSubstitutionEnabled -bool false
+defaults write -g NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# [Clock]
+# =======
+
+# Disable the analog clock in the menu bar in favor of the digital clock
+defaults write com.apple.menuextra.clock IsAnalog -bool false
+# Set the clock in the menu bar
+defaults write com.apple.menuextra.clock DateFormat -string 'h:mm:ss'
+# Enable blinking seperators in the menu bar's clock
+defaults write com.apple.menuextra.clock FlashDateSeparators -bool true
+
+# [Screenshots]
+# =============
+
+# Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
+defaults write com.apple.screencapture type -string 'png'
+# Save screenshots to downloads folder
+defaults write com.apple.screencapture location ~/Downloads
+
+# [Software Updates]
+# ==================
+
+# Automatically check for available software updates
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist AutomaticCheckEnabled -bool true
+# Automatically download available software updates
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticDownload -bool true
+# Automatically install available software updates
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist ConfigDataInstall -bool true
+sudo defaults write /Library/Preferences/com.apple.SoftwareUpdate.plist CriticalUpdateInstall -bool true
+sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdate -bool true
+sudo defaults write /Library/Preferences/com.apple.commerce AutoUpdateRestartRequired -bool true
+
+# [Animations]
+# ============
+
+# Disable window animations
+defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
+# Disable animations when opening a Quick Look window
+defaults write -g QLPanelAnimationDuration -float 0
+# Speed up window resize animations
+defaults write -g NSWindowResizeTime -float 0.003
+# Auto hide menu bar
+defaults write -g _HIHideMenuBar -bool true
+
+# [Misc]
+# ======
+
+# Disable the Dashboard
+defaults write com.apple.dashboard mcx-disabled -bool true
+# Automatically expand "Save As..." dialogue boxes
+defaults write -g NSNavPanelExpandedStateForSaveMode -bool true
+defaults write -g NSNavPanelExpandedStateForSaveMode2 -bool true
+# Enable automatic back-up to time machine
+defaults write com.apple.TimeMachine AutoBackup -bool true
+# Show all filename extensions (e.g. example.txt)
+defaults write -g AppleShowAllExtensions -bool true
+# Enable air-drop over ethernet
+defaults write com.apple.NetworkBrowser BrowseAllInterfaces 1
+# Enable preview thumbnails for videos
+defaults write com.apple.QuickLookDaemon QLDisableQTThumbnails -bool true
+# Automatically quit printer app once the print jobs complete
+defaults write com.apple.print.PrintingPrefs 'Quit When Finished' -bool true
+# Disable the “Are you sure you want to open this application?” dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+# Enable font smoothing to improve quality of text on screen
+defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO
+# Enable the power chime when computer is plugged into charger
+defaults write com.apple.PowerChime ChimeOnAllHardware -bool true
+
+# Use the Cloudflare DNS Service
+networksetup -setdnsservers Wi-Fi \
+	1.1.1.1 \
+	1.0.0.1 \
+	2606:4700:4700::1111 \
+	2606:4700:4700::1001
+
+# Restart the applications that were modified
+for app in 'Activity Monitor' 'Address Book' 'Calendar' 'Contacts' \
+    'Dock' 'Finder' 'Mail' 'Messages' 'Photos' 'Safari' 'SystemUIServer' \
+    'Terminal' 'iCal'; do
+    pkill -I "${app}"
+done

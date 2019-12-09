@@ -1,0 +1,17 @@
+Host *
+  StrictHostKeyChecking no
+  PermitLocalCommand yes
+  ServerAliveInterval 60
+  GatewayPorts yes
+  CheckHostIP no
+  EscapeChar C
+
+Host cirrus
+  HostName 157.230.128.68
+  User cam
+  ForwardAgent yes
+
+Host vm
+  HostName 127.0.0.1
+  User trojan
+  Port 3022

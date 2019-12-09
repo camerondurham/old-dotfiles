@@ -1,0 +1,114 @@
+#!/usr/bin/env zsh
+#: vi set ft=sh
+
+# [ Enable vi mode ]
+bindkey -v
+
+# [ Erase vi prompt mode upon command execution ]
+setopt transientrprompt
+
+# [ Add ZLE widgets ]
+
+function _git-status () {
+    zle -U "git status"
+    zle accept-line
+}
+zle -N _git-status
+bindkey '\eg' _git-status
+
+
+# Customize the prompt string
+# ORIG='%B%F{white}[%F{green}%n%F{white}%F{magenta}@%F{blue}%m%F{white}] %F{yellow}%~ %F{red}%# '
+
+# function zle-line-init zle-keymap-select () {
+#     # CMD="%F{black}%K{green} NORMAL %f%k%b"
+#     # INS="%F{black}%K{blue} INSERT %f%k%b"
+#     # RPS1="${${KEYMAP/vicmd/${CMD}}/(main|viins)/${INS}}"
+#     # PS1="${${KEYMAP/vicmd/${CMD}}/(main|viins)/${INS}}${ORIG}%f%k%b"
+#     case $KEYMAP in
+#       main|viins)
+#         export PS1="%B%F{yellow}%F{blue}%c%F{yellow} %F{green}%(!.#.λ) %b%f"
+#         export PS2="%B%F{yellow}%F{blue}%c%F{yellow} %F{green}- %b%f"
+#         ;;
+#       vicmd)
+#         export PS1="%B%F{yellow}%F{blue}%c%F{yellow} %F{magenta}%(!.#.λ) %b%f"
+#         export PS2="%B%F{yellow}%F{blue}%c%F{yellow} %F{magenta}- %b%f"
+#         ;;
+#     esac
+#     zle reset-prompt
+# }
+#
+# zle -N zle-line-init
+# zle -N zle-keymap-select
+
+git_prompt() {
+  BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\(.*\)/\1/')
+
+  if [ ! -z $BRANCH ]; then
+    echo -n "%F{yellow}$BRANCH"
+
+    if [ ! -z "$(git status --short)" ]; then
+      echo " %F{red}✗"
+    fi
+  fi
+}
+
+vim_prompt() {
+  if [ ! -z $VIMRUNTIME ]; then
+    echo ":%F{green}sh ";
+  fi
+}
+
+PS1='
+$(vim_prompt)%F{blue}%~$(git_prompt)
+%F{244}%# %F{reset}'
+
+
+# [ Configure keybindings ]
+
+bindkey -M viins '^B' vi-backward-char
+bindkey -M viins '^P' vi-up-line-or-history
+bindkey -M viins '^N' vi-down-line-or-history
+bindkey -M viins '^E' vi-end-of-line
+bindkey -M viins '^A' vi-beginning-of-line
+bindkey -M viins '^R' history-incremental-search-backward
+bindkey -M viins '^K' vi-kill-eol
+bindkey -M viins '^U' backward-kill-line
+bindkey -M viins '^Y' vi-put-after
+bindkey -M viins '^T' transpose-chars
+bindkey -M viins '^F' autosuggest-accept
+
+bindkey -M viins '\et' transpose-words
+bindkey -M viins '\eu' vi-up-case
+bindkey -M viins '\el' vi-down-case
+bindkey -M viins '\ec' capitalize-word
+bindkey -M viins '\e.' vi-yank
+bindkey -M viins '\ef' vi-forward-word
+bindkey -M viins '\eb' vi-backward-word
+
+function custom-vi-cmd-mode {
+  zle vi-cmd-mode
+  zle vi-forward-char
+}
+zle -N custom-vi-cmd-mode
+bindkey -M viins '\\j' custom-vi-cmd-mode
+
+# [ Enter the command line with `⌥ v` ]
+autoload -Uz edit-command-line
+bindkey -M viins '\ev' edit-command-line
+bindkey -M vicmd '\ev' edit-command-line
+zle -N edit-command-line
+
+#  Toggle Vim session (or last suspended process) with Ctrl-Z
+
+function fg-bg () {
+	if [[ $BUFFER -eq 0 ]]; then
+		fg
+	else
+		zle push-input
+	fi
+}
+
+zle -N fg-bg
+bindkey '^Z' fg-bg
+

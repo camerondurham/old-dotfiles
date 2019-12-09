@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+# Only execute if the user is running macOS
+[[ $(uname -s) != "Darwin" ]] && exit 0
+
+# Only execute if the user has installed Homebrew
+[[ -z $(which brew) ]] && exit 0
+
+# Only execute if the user has installed Visual Studio Code through Homebrew
+[[ $(which code) != "$(brew --prefix)/bin/code" ]] && exit 0
+
+vscode="${HOME}/Library/Application Support/Code/User"
+echo "Directory of script is $0:A"

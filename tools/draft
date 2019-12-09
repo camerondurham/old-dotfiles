@@ -1,0 +1,11 @@
+#!/bin/bash
+# usage: $ draft {optional title}
+# description: copies basic jekyll boilerplate from source_dir to your _drafts folder in jekyll
+s_dir="$HOME/.templates"
+g_repo="camerondurham.github.io"
+if [[ $# < 1 ]]; then title="default"; else title="$1"; fi
+draft_day=$(date +%Y-%m-%d)
+draft_file="$draft_day-$title.md"
+t_dir="$HOME/$g_repo/_drafts"
+cp "$s_dir/post" "$t_dir/$draft_file" # the stupid simple commands I'm really trying to automate
+vim "$t_dir/$draft_file"

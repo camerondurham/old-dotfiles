@@ -1,0 +1,6 @@
+#!/bin/bash
+public=$(curl -s https://checkip.amazonaws.com)
+private=$(ifconfig | grep -A 1 'en0' | tail -1 | awk '{print $2}')
+echo "Public IP: ${public}"
+echo "Private: ${private}"
+
