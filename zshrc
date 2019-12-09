@@ -126,8 +126,6 @@ export NODE_REPL_HISTORY=~/.hist/node
 
 export INPUTRC=${DOTFILES}/inputrc
 export HUB_CONFIG=${DOTFILES}/hub/config
-export GITHUB_TOKEN="6250104e13944d844f040bde0c9f950877cddb53"
-export HOMEBREW_GITHUB_API_TOKEN="57913a76ba2ee0023bc717fdde03e97b8a38fdfc"
 export XDG_CONFIG_HOME=${DOTFILES}
 eval "$(hub alias -s)"
 
