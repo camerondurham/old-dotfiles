@@ -1,0 +1,3 @@
+[submodule "LanguageClient-neovim"]
+	path = nvim/pack/git-plugins/start/LanguageClient-neovim
+	url = git@github.com:autozimu/LanguageClient-neovim.git

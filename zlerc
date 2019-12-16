@@ -13,31 +13,11 @@ function _git-status () {
     zle -U "git status"
     zle accept-line
 }
+
 zle -N _git-status
 bindkey '\eg' _git-status
 
 
-# Customize the prompt string
-# ORIG='%B%F{white}[%F{green}%n%F{white}%F{magenta}@%F{blue}%m%F{white}] %F{yellow}%~ %F{red}%# '
-
-# function zle-line-init zle-keymap-select () {
-#     # CMD="%F{black}%K{green} NORMAL %f%k%b"
-#     # INS="%F{black}%K{blue} INSERT %f%k%b"
-#     # RPS1="${${KEYMAP/vicmd/${CMD}}/(main|viins)/${INS}}"
-#     # PS1="${${KEYMAP/vicmd/${CMD}}/(main|viins)/${INS}}${ORIG}%f%k%b"
-#     case $KEYMAP in
-#       main|viins)
-#         export PS1="%B%F{yellow}%F{blue}%c%F{yellow} %F{green}%(!.#.λ) %b%f"
-#         export PS2="%B%F{yellow}%F{blue}%c%F{yellow} %F{green}- %b%f"
-#         ;;
-#       vicmd)
-#         export PS1="%B%F{yellow}%F{blue}%c%F{yellow} %F{magenta}%(!.#.λ) %b%f"
-#         export PS2="%B%F{yellow}%F{blue}%c%F{yellow} %F{magenta}- %b%f"
-#         ;;
-#     esac
-#     zle reset-prompt
-# }
-#
 # zle -N zle-line-init
 # zle -N zle-keymap-select
 

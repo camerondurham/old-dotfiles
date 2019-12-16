@@ -19,8 +19,13 @@ set ignorecase      " make search ignore case
 
 autocmd BufReadPost * set formatoptions-=cro
                     " newlines shouldn't make new lines
+autocmd BufReadPost *.rs setlocal filetype=rust
+
 set splitright      " vertical splits always open on right
 set splitbelow      " make horizontal splits always open below
+
+" ENVIRONMENT VARIABLES
+let g:python3_host_prog = '/usr/bin/python3'
 
 " KEYMAPS
 
@@ -79,6 +84,42 @@ iabbrev @@ polytime@icloud.com
 
 " FYI: cannot add to runtimepath
 " Packages searched for in: ~/.local/share/nvim/site/pack
+
+" LanguageClient-neovim
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+
+" Rust format on save:
+let g:rustfmt_autosave = 1
+
+" LANG-SERVER: RUST CONFIGURATION
+" See https://github.com/autozimu/LanguageClient-neovim
+"
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rls'],
+    \ 'cpp': ['clangd']
+\ }
+
+" Don't show inline errors. See:
+" https://github.com/autozimu/LanguageClient-neovim/issues/719
+let g:LanguageClient_useVirtualText=0
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+" Open menu for language options
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+nnoremap <silent> <leader>c :call LanguageClient#textDocument_codeAction()<CR>
+nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
+" }}}
+
 
 " COMMANDS
 

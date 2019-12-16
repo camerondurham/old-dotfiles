@@ -128,6 +128,7 @@ export NODE_REPL_HISTORY=~/.hist/node
 export INPUTRC=${DOTFILES}/inputrc
 export HUB_CONFIG=${DOTFILES}/hub/config
 export XDG_CONFIG_HOME=${DOTFILES}
+export HOME=~
 eval "$(hub alias -s)"
 
 HOMEBREW_EDITOR="code"
@@ -135,19 +136,18 @@ HOMEBREW_EDITOR="code"
 # Disable <C-q> & <C-s>
 stty -ixon
 
+# Export environment variables
 # Enable support for GPG encryption of echo command
 export GPG_TTY=$(tty)
 
 # Configure environments that can be CD'd into at all times
-CDPATH=.:~/Dropbox:~:~/site:~/projects
-export CDPATH
+export CDPATH=.:$HOME/Dropbox:$HOME:~/site:$HOME/projects:$HOME/dot:$HOME/Dropbox/notes
+
 
 export GOPATH=~/go
 export GNUPGHOME=~/.gpg
 
-# Configure python module path and console config file
-export PYTHONPATH=${DOTFILES}/python/modules:${PYTHONPATH}
-export PYTHONSTARTUP=${DOTFILES}/python/config
+
 
 # Colorize man pages via termcap capabilities
 # `https://linux.die.net/man/5/termcap`
