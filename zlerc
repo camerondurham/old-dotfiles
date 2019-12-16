@@ -1,12 +1,6 @@
 #!/usr/bin/env zsh
 #: vi set ft=sh
 
-# [ Enable vi mode ]
-bindkey -v
-
-# [ Erase vi prompt mode upon command execution ]
-setopt transientrprompt
-
 # [ Add ZLE widgets ]
 
 function _git-status () {

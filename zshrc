@@ -143,6 +143,15 @@ export GPG_TTY=$(tty)
 # Configure environments that can be CD'd into at all times
 export CDPATH=.:$HOME/Dropbox:$HOME:~/site:$HOME/projects:$HOME/dot:$HOME/Dropbox/notes
 
+# Add LLVM first in path
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+# To use the bundled libc++ please add the following LDFLAGS:
+#   LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+
+# Tell compilers how to find llvm
+export LDFLAGS="-L/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/opt/llvm/include"
 
 export GOPATH=~/go
 export GNUPGHOME=~/.gpg

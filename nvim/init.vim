@@ -93,6 +93,15 @@ set hidden
 " Rust format on save:
 let g:rustfmt_autosave = 1
 
+" LANG-SERVER: CPP CONFIGURATION
+if executable('clangd')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd', '-background-index']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
+
 " LANG-SERVER: RUST CONFIGURATION
 " See https://github.com/autozimu/LanguageClient-neovim
 "
