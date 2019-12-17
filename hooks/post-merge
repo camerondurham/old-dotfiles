@@ -157,6 +157,6 @@ if [[ $(realpath ~/.vim) != $(realpath ${dot}/vim) ]]; then
   ln -sb ~/dot/vim ~/.vim
 fi
 
-mkdir -p ~/.hist/vim
+mkdir -p ~/.hist/nvim
 
 set +e

@@ -16,6 +16,8 @@ set softtabstop=4   " use soft tabs with 2 spaces
 set tabstop=4       " view tabs as 2 space
 set shiftwidth=4    " let indent be 2 spaces
 set ignorecase      " make search ignore case
+set undodir=~/.hist/nvim
+set undofile
 
 autocmd BufReadPost * set formatoptions-=cro
                     " newlines shouldn't make new lines
@@ -26,6 +28,7 @@ set splitbelow      " make horizontal splits always open below
 
 " ENVIRONMENT VARIABLES
 let g:python3_host_prog = '/usr/bin/python3'
+let g:python_host_prog = '/usr/bin/python2'
 
 " KEYMAPS
 
@@ -85,13 +88,15 @@ iabbrev @@ polytime@icloud.com
 " FYI: cannot add to runtimepath
 " Packages searched for in: ~/.local/share/nvim/site/pack
 
+
+" DEOPLETE
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+
 " LanguageClient-neovim
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
-
-" Rust format on save:
-let g:rustfmt_autosave = 1
 
 " LANG-SERVER: CPP CONFIGURATION
 if executable('clangd')
@@ -106,9 +111,13 @@ endif
 " See https://github.com/autozimu/LanguageClient-neovim
 "
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rls'],
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ 'cpp': ['clangd']
 \ }
+
+
+" Rust format on save:
+let g:rustfmt_autosave = 1
 
 " Don't show inline errors. See:
 " https://github.com/autozimu/LanguageClient-neovim/issues/719
