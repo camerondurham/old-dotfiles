@@ -47,9 +47,10 @@ git_prompt() {
     echo -n "%F{magenta}$BRANCH"
 
     if [ ! -z "$(git status --short)" ]; then
-      echo " %F{red}●"
-      else
-          echo " %F{green}●"
+        NUM=$(git status | egrep -c "modified")
+          echo " %F{red}● %F{white}($NUM)"
+          else
+              echo " %F{green}●"
     fi
   fi
 }

@@ -6,8 +6,11 @@
 "
 " Author: Cameron Durham
 " Email: polytime@icloud.com
+" Site: https://polytime.space
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DEFAULTS:
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number
 let mapleader = " "
 set cursorline		" highlight current line
@@ -19,8 +22,11 @@ set ignorecase      " make search ignore case
 set undodir=~/.hist/nvim
 set undofile
 
-autocmd BufReadPost * set formatoptions-=cro
-                    " newlines shouldn't make new lines
+" Set 'formatoptions' to break comment lines but not other lines
+" and not insert comment leader on <CR> but insert when hitting or using "o"
+
+setlocal fo-=cr fo+=oql
+
 autocmd BufReadPost *.rs setlocal filetype=rust
 
 set splitright      " vertical splits always open on right
@@ -30,7 +36,9 @@ set splitbelow      " make horizontal splits always open below
 let g:python3_host_prog = '/usr/bin/python3'
 let g:python_host_prog = '/usr/bin/python2'
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " redraw screen and unhighlight searches
 nnoremap <C-l> :noh<cr>
@@ -48,7 +56,9 @@ set mouse=nicr          "   enable mouse in normal,
 " Note: above comment cannot go after mapping
 inoremap jk <esc>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LEADER KEYMAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " uppercase word in normal mode
 nnoremap <leader>u <esc>viwUea
 
@@ -83,7 +93,9 @@ vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>
 " ABBREVIATIONS
 iabbrev @@ polytime@icloud.com
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PACKAGES
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " FYI: cannot add to runtimepath
 " Packages searched for in: ~/.local/share/nvim/site/pack
@@ -91,7 +103,7 @@ iabbrev @@ polytime@icloud.com
 
 " DEOPLETE
 " Use deoplete.
-let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 1
 
 " LanguageClient-neovim
 " Required for operations modifying multiple buffers like rename.
@@ -139,7 +151,14 @@ nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
 " }}}
 
 
+" VIM-MARKDOWN
+
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'cpp', 'rust', 'c', 'java', 'go']
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COMMANDS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " open file or jump if already open
 command! -nargs=1 -complete=file O tab drop <args>
@@ -156,7 +175,9 @@ aug END
 " Automatically delete all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VISUAL CUSTOMIZATION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 colorscheme paramount
 
@@ -173,7 +194,7 @@ if exists('+colorcolumn')
 	" highlight up to 255 cols (the current Vim Max, check for Nvim)
 	" beyond 'textwidth'
 	" let &l:colorcolumn='+'.join(range(0,254, ',+')
-        let &l:colorcolumn=+61
+        let &l:colorcolumn=+79
         hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 endif
@@ -181,7 +202,9 @@ endif
 " Open Vexplore windows to take up 15% of the window width
 let g:netrw_winsize = 15
 
-" Vimscript functions
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIMSCRIPT FUNCTIONS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! FileExists(FileName)
 	return !empty(glob(a:FileName))
