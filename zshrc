@@ -208,6 +208,10 @@ alias lsl='ls -l'
 
 alias gs='git status'
 
+# because why the fuck not
+alias weather='curl wttr.in'
+
+
 # Call bash function to call ls on any cd command
 alias cd='fn_cd'
 

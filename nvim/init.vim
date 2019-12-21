@@ -29,6 +29,7 @@ set splitright      " vertical splits always open on right
 set splitbelow      " make horizontal splits always open below
 
 " ENVIRONMENT VARIABLES
+"   Required by deoplete/LanguageClient_neovim
 let g:python3_host_prog = '/usr/bin/python3'
 let g:python_host_prog = '/usr/bin/python2'
 
@@ -49,7 +50,7 @@ set mouse=nicr          "   enable mouse in normal,
                         " (so there's something to scroll to)
 
 " set escape shortcut key
-" Note: above comment cannot go after mapping
+" Note: inoremap jk <esc> " commenting here makes bad sh*t happen
 inoremap jk <esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -88,7 +89,6 @@ vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>
 
 " Set 'formatoptions' to break comment lines but not other lines
 " and not insert comment leader on <CR> but insert when hitting or using "o"
-
 autocmd FileType * setlocal fo-=cr fo+=oql
 
 " ABBREVIATIONS
@@ -104,7 +104,7 @@ iabbrev @@ polytime@icloud.com
 
 " DEOPLETE
 " Use deoplete.
-" let g:deoplete#enable_at_startup = 0
+autocmd FileType *.cpp *.rs let g:deoplete#enable_at_startup = 1
 
 " LanguageClient-neovim
 " Required for operations modifying multiple buffers like rename.
@@ -112,6 +112,7 @@ set hidden
 
 
 " LANG-SERVER: CPP CONFIGURATION
+" Disable ALE for all LanguageClient clients
 if executable('clangd')
     au User lsp_setup call lsp#register_server({
         \ 'name': 'clangd',
@@ -119,6 +120,15 @@ if executable('clangd')
         \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
         \ })
 endif
+
+
+" Disable ALE for LC_neovim clients
+" see :helpgrep ale_pattern_options for more info
+let g:ale_pattern_options = {
+            \ '\.cpp$': {'ale_enabled': 0},
+            \ '\.rs$': {'ale_enabled': 0},
+\}
+
 
 " LANG-SERVER: RUST CONFIGURATION
 " See https://github.com/autozimu/LanguageClient-neovim
@@ -180,21 +190,21 @@ colorscheme paramount
 
 if has('folding')
 	if has('windows')
-		set fillchars=vert:┃		" BOX DRAWINGS VERTICAL (U+2503) for unbroken window lines
+		set fillchars=vert:┃  " BOX DRAWINGS VERTICAL (U+2503) for unbroken window lines
 	endif
 	set foldmethod=indent     " DUMBEST BUT FASTEST FOLD METHOD
 	set foldlevelstart=99
 endif
 
-
-if exists('+colorcolumn')
-	" highlight up to 255 cols (the current Vim Max, check for Nvim)
-	" beyond 'textwidth'
-	" let &l:colorcolumn='+'.join(range(0,254, ',+')
-        let &l:colorcolumn=+79
+aug line_guard
+    au!
+    if exists('+colorcolumn')
+        " highlight up to 255 cols, the max in Vim (?)
+        " credits to the good people of vi-stackexchange: https://bit.ly/35XMfIM
+        let &colorcolumn="80,".join(range(81,255),",")
         hi ColorColumn ctermbg=lightgrey guibg=lightgrey
-
-endif
+    endif
+aug END
 
 " Open Vexplore windows to take up 15% of the window width
 let g:netrw_winsize = 15
@@ -207,17 +217,3 @@ function! FileExists(FileName)
 	return !empty(glob(a:FileName))
 endfunction
 
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return l:counts.total == 0 ? 'OK' : printf(
-    \   '%dW %dE',
-    \   all_non_errors,
-    \   all_errors
-    \)
-endfunction
-
-" set statusline+=%{LinterStatus()}
