@@ -1,0 +1,35 @@
+#!/bin/sh
+    alias ka="killall" \
+          mkd="mkdir -pv" \
+          SS="sudo systemctl" \
+          f="$FILE" \
+          g="git" \
+          trem="transmission-remote" \
+          e="$EDITOR" \
+          v="$EDITOR" \
+          x="sxiv -ft *" \
+          sdn="sudo shutdown -h now" \
+          gua="git remote | xargs -L1 git push --all" \
+          grep="grep --color=auto" \
+          ls="ls -GHP" \
+          la="ls -aGHP" \
+          sl="ls -GHP" \
+          diff="diff --color=auto" \
+          ccat="highlight --out-format=ansi" \
+          yt="youtube-dl --add-metadata -i -o '%(upload_date)s-%(title)s.%(ext)s'" \
+          yta="yt -x -f bestaudio/best" \
+          YT="youtube-viewer" \
+          pj="cd $HOME/projects" \
+          cfv="$EDITOR $HOME/.vimrc" \
+          cfb="$EDITOR $HOME/.bashrc" \
+          cfa="$EDITOR $HOME/.alias" \
+          python="python3.7" \
+          iterm2="/Applications/iTerm.app/Contents/MacOS/iTerm2 ; exit;" \
+          iTerm2="/Applications/iTerm.app/Contents/MacOS/iTerm2 ; exit;" \
+          iterm="/Applications/iTerm.app/Contents/MacOS/iTerm2 ; exit;" \
+          serve="cd ~/camerondurham.github.io && bundle exec jekyll serve" \
+          all="docker ps -a -q"
+
+
+vf() { fzf | xargs -r -I % $EDITOR % ;}
+

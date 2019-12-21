@@ -52,10 +52,8 @@ git_prompt() {
     echo -n "%F{magenta}$BRANCH"
 
     if [ ! -z "$(git status --short)" ]; then
-        MODIFIED=$(git status | egrep -c "modified")
-        ADDED=$(git status | egrep -c "new file")
-        IF_UNTRACKED=$(git status | egrep -c "Untracked")
-        echo " %F{red}● %F{white}($(($MODIFIED + $ADDED + $IF_UNTRACKED)))"
+        STAGED=$(git status | egrep -c "(modified)|(deleted)|(renamed)|(new file)|(Untracked)")
+        echo " %F{red}● %F{white}($STAGED)"
           else
               echo " %F{green}●"
     fi
@@ -79,10 +77,6 @@ fn_cd() {
 #  print -P '%B%F{red}co%F{green}lo%F{blue}rs%f%b'
 # for 0-255 xterm color scale reference:
 #  https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
-
-
-PS1='$(vim_prompt)%B%F{249}%~$(git_prompt)
-%F{green}%(!.#.λ) %b%f %F{reset}'
 
 
 # Add a custom alias for restarting sshd
@@ -123,15 +117,11 @@ PAGER="less"
 # Call the function to set the path, without adding new variables to the shell
 # setpath
 
-# [ Delete temporary files that haven't been accessed in over 1 day ]
-mkdir -p ~/tmp
-
 # Make a directory to store history for various consoles
 mkdir -p ~/.hist
 
 # Configure history file locations
 export LESSHISTFILE=~/.hist/less
-export NODE_REPL_HISTORY=~/.hist/node
 
 export INPUTRC=${DOTFILES}/inputrc
 export HUB_CONFIG=${DOTFILES}/hub/config
@@ -223,7 +213,7 @@ alias cd='fn_cd'
 
 alias vim='nvim'
 alias vi='nvim'
-
+alias v='nvim'
 
 # Colorize regular expression printing
 alias grep="grep --color=auto"
@@ -247,10 +237,21 @@ alias date='date +"%F %T%:z"'
 alias info='info --vi-keys'
 
 
-# start CS 356 VM in background
+# start CS356 VM in background
 alias fuckvms='VBoxHeadless -s CS356 &'
 
 alias vmssh='ssh -p 3022 trojan@127.0.0.1'
+
+# start cs-104 docker env in current directory
+alias cpup='docker run -ti -v "$(pwd)":/home/work csci104 /bin/bash'
+
+# compile a c++ program with ALL the fucking warnings
+#   usage: compile <FILE>.cpp OR compile <FILE>.cpp -o <FILE>.o
+alias compile='g++ --std=c++11 -Wextra -pedantic -Wall -Wshadow
+            \ -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Werror'
+
+# TODO:
+# alias for starting CS350 docker image
 
 # Colorize directory listings
 ls() {

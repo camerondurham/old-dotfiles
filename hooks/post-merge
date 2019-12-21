@@ -1,10 +1,5 @@
 #!/usr/bin/env zsh
 
-if [[ ! $(uname -s) =~ (Darwin|Linux) ]]; then
-	echo "Unsupported operating system for $1(:A)" >&2
-	exit 1
-fi
-
 # Save dot as the name of the dotfiles directory
 export dot=~/dot
 
@@ -51,7 +46,7 @@ update () {
     fi
   fi
 
-  # Added by Cameron for plugin links until I find how to append to runtimepath
+  # Link neovim plugins since appending to runtimepath fails
   ln -s ~/dot/nvim/pack/git-plugins ~/.local/share/nvim/site/pack
   return 0
 }
@@ -94,16 +89,9 @@ rm -rf ~/.bash_{"profile","history","login","sessions"}
 
 # Link files to home directory
 files=(
-  "bashrc"
   "config"
   "nvim"
-  "local"
-  "gdbinit"
   "inputrc"
-  "irbrc"
-  "profile"
-  "pylintrc"
-  "shrc"
   "vimrc"
   "zlerc"
   "zprofile"

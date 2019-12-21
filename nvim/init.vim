@@ -22,10 +22,6 @@ set ignorecase      " make search ignore case
 set undodir=~/.hist/nvim
 set undofile
 
-" Set 'formatoptions' to break comment lines but not other lines
-" and not insert comment leader on <CR> but insert when hitting or using "o"
-
-setlocal fo-=cr fo+=oql
 
 autocmd BufReadPost *.rs setlocal filetype=rust
 
@@ -90,6 +86,11 @@ nnoremap <leader>' viw'<esc>bi'<esc>lel
 vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>
 
 
+" Set 'formatoptions' to break comment lines but not other lines
+" and not insert comment leader on <CR> but insert when hitting or using "o"
+
+autocmd FileType * setlocal fo-=cr fo+=oql
+
 " ABBREVIATIONS
 iabbrev @@ polytime@icloud.com
 
@@ -103,7 +104,7 @@ iabbrev @@ polytime@icloud.com
 
 " DEOPLETE
 " Use deoplete.
-" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#enable_at_startup = 0
 
 " LanguageClient-neovim
 " Required for operations modifying multiple buffers like rename.
@@ -148,12 +149,8 @@ nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <leader>c :call LanguageClient#textDocument_codeAction()<CR>
 nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
-" }}}
 
 
-" VIM-MARKDOWN
-
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'cpp', 'rust', 'c', 'java', 'go']
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
