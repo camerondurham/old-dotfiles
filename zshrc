@@ -48,12 +48,14 @@ bindkey '^e' end-of-line
 git_prompt() {
   BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\(.*\)/\1/')
 
+  # 140 is light magenta
   if [ ! -z $BRANCH ]; then
-    echo -n "%F{magenta}$BRANCH"
+    echo -n "%F{140}$BRANCH"
 
     if [ ! -z "$(git status --short)" ]; then
         STAGED=$(git status | egrep -c "(modified)|(deleted)|(renamed)|(new file)|(Untracked)")
-        echo " %F{red}● %F{white}($STAGED)"
+        # 146 is light grey/blueish
+        echo " %F{red}● %F{146}($STAGED)"
           else
               echo " %F{green}●"
     fi
@@ -149,7 +151,7 @@ RUST_SRC_PATH=/usr/local/src/rust/src
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 
 # To use the bundled libc++ please add the following LDFLAGS:
-#   LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
 
 # Tell compilers how to find llvm
 export LDFLAGS="-L/usr/local/opt/llvm/lib"
@@ -253,6 +255,12 @@ alias cpup='docker run -ti -v "$(pwd)":/home/work csci104 /bin/bash'
 #   usage: compile <FILE>.cpp OR compile <FILE>.cpp -o <FILE>.o
 alias compile='g++ --std=c++11 -Wextra -pedantic -Wall -Wshadow
             \ -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Werror'
+
+# start async matrix with Japanese katakana characters
+# source: https://github.com/will8211/unimatrix
+# sudo curl -L https://raw.githubusercontent.com/will8211/unimatrix/master/unimatrix.py -o /usr/local/bin/unimatrix
+# sudo chmod a+rx /usr/local/bin/unimatrix
+alias matrix='unimatrix -naf -s 96 -l k'
 
 # TODO:
 # alias for starting CS350 docker image

@@ -129,6 +129,8 @@ let g:ale_pattern_options = {
             \ '\.rs$': {'ale_enabled': 0},
 \}
 
+autocmd BufEnter *.cpp let g:ale_enabled = 0
+autocmd BufEnter *.rs let g:ale_enabled = 0
 
 " LANG-SERVER: RUST CONFIGURATION
 " See https://github.com/autozimu/LanguageClient-neovim

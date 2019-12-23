@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 #: vi set ft=sh
 
-# [ Add ZLE widgets ]
+# Add ZLE widgets
 
 function _git-status () {
     zle -U "git status"
@@ -21,9 +21,11 @@ vim_prompt() {
   fi
 }
 
+PRETTY_PROMPT_CHAR='❯'
+
 PS1='
-$(vim_prompt)%F{blue}%~$(git_prompt)
-%F{244}%# %F{reset}'
+$(vim_prompt)%B%F{159}%~$(git_prompt)
+%B%F{141}$PRETTY_PROMPT_CHAR %F{reset}'
 
 
 # [ Configure keybindings ]
