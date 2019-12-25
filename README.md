@@ -13,16 +13,16 @@ relies on a few simple shell scripts.
 
 In a normal directory, the prompt looks like:
 
-![prompt.png](screenshots/normal_prompt.png)
+![prompt.png](screenshots/staged_prompt.png)
 
 In a git directory, there's a simple heads-up:
 
-![git](screenshots/git_prompt.png)
+![git](screenshots/git_status_prompt.png)
 
 Whenever you `cd` into a new directory, this simply runs `ls` since
 that's usually what I do anyway!
 
-![widgets](screenshots/zsh_widgets.png)
+![widgets](screenshots/cd.png)
 
 
 I've included plugins pre-installed so the NeoVim config should be
