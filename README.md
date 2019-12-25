@@ -1,5 +1,7 @@
 # README
 
+![fullscreen.png](screenshots/fullscreen.png)
+
 ## Not much but still a README! :)
 
 My dotfiles are mainly for me and it's not exactly usable for someone
@@ -35,11 +37,22 @@ color-scheme (paramount) that happend to be my favorite colors.
 
 ## Miscellaneous
 
-I highly recommend the `iTerm2` terminal on macOS. In `icing`
-is the slightly configured terminal scheme I'm using in the screenshots.
-Also in `icing` is the background I'm using for more [ace goodness](https://en.wikipedia.org/wiki/LGBT_symbols#Asexuality)
+### Terminal
+
+I highly recommend the `iTerm2` terminal on macOS. The file
+`icing/Profiles.json` has my current iTerm2 profiles used in the screenshots.
+
+
+### Background
+Also in `icing` is the background I'm using for more
+[ace goodness](https://en.wikipedia.org/wiki/LGBT_symbols#Asexuality)
 in your desktop colorscheme.
+
 Of course, this is available by default on most macOS anyway...
+
+### Font
+
+Check out `icing/font` for the font (`Input`) used in the screenshots.
 
 ## Resources:
 

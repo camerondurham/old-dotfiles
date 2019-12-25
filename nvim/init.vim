@@ -42,6 +42,12 @@ nnoremap <C-l> :noh<cr>
 vnoremap <C-l> <esc>:noh<cr>
 inoremap <C-l> <esc>:noh<cr>i
 
+" toggle color column
+nnoremap <C-c> :call ToggleCC()<cr>
+
+" compile simple c++ program
+nnoremap <f8> :w <cr> :!g++ -std=c++11 -Wall % -o %<.o && ./%<.o <cr>
+
 "   set scroll-up and scroll-down
 " to vim window not terminal window
 set mouse=nicr          "   enable mouse in normal,
@@ -185,37 +191,66 @@ aug END
 autocmd BufWritePre * %s/\s\+$//e
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VISUAL CUSTOMIZATION
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-colorscheme paramount
-
-if has('folding')
-	if has('windows')
-		set fillchars=vert:┃  " BOX DRAWINGS VERTICAL (U+2503) for unbroken window lines
-	endif
-	set foldmethod=indent     " DUMBEST BUT FASTEST FOLD METHOD
-	set foldlevelstart=99
-endif
-
-aug line_guard
-    au!
-    if exists('+colorcolumn')
-        " highlight up to 255 cols, the max in Vim (?)
-        " credits to the good people of vi-stackexchange: https://bit.ly/35XMfIM
-        let &colorcolumn="80,".join(range(81,255),",")
-        hi ColorColumn ctermbg=lightgrey guibg=lightgrey
-    endif
-aug END
-
-" Open Vexplore windows to take up 15% of the window width
-let g:netrw_winsize = 15
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIMSCRIPT FUNCTIONS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! FileExists(FileName)
 	return !empty(glob(a:FileName))
 endfunction
+
+function! SetLineGuard()
+    if exists('+colorcolumn')
+        " clear color column
+        set cc=
+
+        " highlight up to 255 cols, the max in Vim (?)
+        " credits to the good people of vi-stackexchange:
+        " https://bit.ly/35XMfIM
+        let &colorcolumn="80,".join(range(81,255),",")
+        hi ColorColumn ctermbg=darkgrey
+    endif
+endfunction
+
+
+" ColorColumn (cc) is the variable for visual columns
+" Must use syntax call <FUNC_NAME>() to use viml functions
+" https://tinyurl.com/vy4j37l
+function! ToggleCC()
+    if &cc == ''
+        call SetLineGuard()
+    else
+        set cc=
+    endif
+endfunction
+
+" Compile basic C++ programs
+function! CompileCPP()
+    " TODO
+    echom 'LOL not finished yet :)'
+endfunction
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VISUAL CUSTOMIZATION AUGROUPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+colorscheme paramount
+
+if has('folding')
+	if has('windows')
+		set fillchars=vert:┃  " BOX DRAWINGS VERTICAL (U+2503)
+                              " for unbroken window lines
+	endif
+	set foldmethod=indent     " DUMBEST BUT FASTEST FOLD METHOD
+	set foldlevelstart=99
+endif
+
+
+" Open Vexplore windows to take up 15% of the window width
+let g:netrw_winsize = 15
+
+aug line_guard
+    au!
+    set cc=
+    call SetLineGuard()
+aug END
+
 

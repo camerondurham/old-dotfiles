@@ -143,6 +143,8 @@ export GPG_TTY=$(tty)
 # Configure environments that can be CD'd into at all times
 export CDPATH=.:$HOME/Dropbox:$HOME:~/site:$HOME/projects:$HOME/dot:$HOME/Dropbox/notes
 
+# Add anaconda to path
+export PATH="/usr/local/anaconda3/bin:$PATH"
 # Add rust to system path
 export PATH="$HOME/.cargo/bin:$PATH"
 # Add Rust completion engine RACER to path
