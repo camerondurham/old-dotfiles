@@ -43,7 +43,10 @@ vnoremap <C-l> <esc>:noh<cr>
 inoremap <C-l> <esc>:noh<cr>i
 
 " toggle color column
-nnoremap <C-c> :call ToggleCC()<cr>
+nnoremap <leader>cc :call ToggleCC()<cr>
+
+" toggle wrap
+nnoremap <leader>w :call ToggleWrap()<cr>
 
 " compile simple c++ program
 nnoremap <f8> :w <cr> :!g++ -std=c++11 -Wall % -o %<.o && ./%<.o <cr>
@@ -131,8 +134,9 @@ endif
 " Disable ALE for LC_neovim clients
 " see :helpgrep ale_pattern_options for more info
 let g:ale_pattern_options = {
-            \ '\.cpp$': {'ale_enabled': 0},
-            \ '\.rs$': {'ale_enabled': 0},
+            \ '\.cpp$': {'ale_enabled' : 0},
+            \ '\.rs$':  {'ale_enabled' : 0},
+            \ '\.py$':  {'ale_enabled' : 0},
 \}
 
 autocmd BufEnter *.cpp let g:ale_enabled = 0
@@ -143,7 +147,8 @@ autocmd BufEnter *.rs let g:ale_enabled = 0
 "
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'cpp': ['clangd']
+    \ 'cpp': ['clangd'],
+    \ 'python': ['/usr/local/bin/pyls'],
 \ }
 
 
@@ -152,7 +157,33 @@ let g:rustfmt_autosave = 1
 
 " Don't show inline errors. See:
 " https://github.com/autozimu/LanguageClient-neovim/issues/719
-let g:LanguageClient_useVirtualText=0
+" let g:LanguageClient_useVirtualText=1
+
+" Stop annoying diagnostics sign popups, use virtual text with prefix instead
+" source: https://github.com/L0stLink/anvil/blob/master/settings/LanguageClient-neovim.vim
+let g:LanguageClient_diagnosticsSignsMax = 0
+let g:LanguageClient_hasSnippetSupport = 1
+let g:LanguageClient_useFloatingHover = 1
+let g:LanguageClient_useVirtualText = 1
+let g:LanguageClient_hasSnippetSupport = 1
+let g:LanguageClient_changeThrottle = 0.5
+let g:LanguageClient_virtualTextPrefix = "    ••➜ "
+let g:LanguageClient_diagnosticsList = "Location"
+let g:LanguageClient_selectionUI = "location-list"
+let g:LanguageClient_hoverpreview = "Always"
+
+
+" Language Server Status
+
+" Bindings for LanguageClient-neovim
+augroup bind_ls_actions
+    autocmd!
+    " Use language server with supported file types
+    autocmd FileType javascript,python setlocal omnifunc=LanguageClient#complete
+    " Update lightline on LC diagnostic update
+    autocmd User LanguageClientDiagnosticsChanged call lightline#update()
+augroup end
+"""
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
@@ -190,6 +221,15 @@ aug END
 " Automatically delete all trailing whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
 
+" When editing a file, always jump to the last known cursor position.
+" Don't do it for commit messages, when the position is invalid, or when
+" inside an event handler (happens when dropping a file on gvim). (thoughtbot)
+autocmd BufReadPost *
+    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIMSCRIPT FUNCTIONS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -223,11 +263,20 @@ function! ToggleCC()
     endif
 endfunction
 
+function! ToggleWrap()
+    if &wrap == 0
+        set wrap
+    else
+        set nowrap
+    endif
+endfunction
+
 " Compile basic C++ programs
 function! CompileCPP()
     " TODO
     echom 'LOL not finished yet :)'
 endfunction
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VISUAL CUSTOMIZATION AUGROUPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -252,5 +301,3 @@ aug line_guard
     set cc=
     call SetLineGuard()
 aug END
-
-

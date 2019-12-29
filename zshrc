@@ -203,67 +203,6 @@ gpg-agent --daemon &>/dev/null
 # Used to communicate with the SSH agent
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 
-
-alias la='ls -F'
-alias sl="ls -F"
-alias lsa='ls -A'
-alias ll='ls -l'
-alias lsl='ls -l'
-
-alias gs='git status'
-
-# because why the fuck not
-alias weather='curl wttr.in'
-
-
-# Call bash function to call ls on any cd command
-alias cd='fn_cd'
-
-alias vim='nvim'
-alias vi='nvim'
-alias v='nvim'
-
-# Colorize regular expression printing
-alias grep="grep --color=auto"
-alias egrep="egrep --color=auto"
-alias fgrep="fgrep --color=auto"
-alias pcregrep="pcregrep--color=auto"
-alias pcre2grep="pcre2grep --color=auto"
-
-# Silence the welcome message when entering the python console
-alias python='python -q'
-# Use a custom location for tmux configurations
-alias tmux="tmux -f ${DOTFILES}/tmuxrc"
-
-
-alias du='du --time-style=+"%F %T%:z"'
-# Format the timestamp like RFC 3339
-alias date='date +"%F %T%:z"'
-# e.g. `2019-06-05 13:41:32-07:00`
-
-# use vi keys on info pages
-alias info='info --vi-keys'
-
-
-# start CS356 VM in background
-alias fuckvms='VBoxHeadless -s CS356 &'
-
-alias vmssh='ssh -p 3022 trojan@127.0.0.1'
-
-# start cs-104 docker env in current directory
-alias cpup='docker run -ti -v "$(pwd)":/home/work csci104 /bin/bash'
-
-# compile a c++ program with ALL the fucking warnings
-#   usage: compile <FILE>.cpp OR compile <FILE>.cpp -o <FILE>.o
-alias compile='g++ --std=c++11 -Wextra -pedantic -Wall -Wshadow
-            \ -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Werror'
-
-# start async matrix with Japanese katakana characters
-# source: https://github.com/will8211/unimatrix
-# sudo curl -L https://raw.githubusercontent.com/will8211/unimatrix/master/unimatrix.py -o /usr/local/bin/unimatrix
-# sudo chmod a+rx /usr/local/bin/unimatrix
-alias matrix='unimatrix -naf -s 96 -l k'
-
 # TODO:
 # alias for starting CS350 docker image
 
@@ -319,3 +258,5 @@ g() {
 # Complete go like git
 compdef g=git
 
+# source aliases after function definitions
+[ -f "${DOTFILES}/aliasrc" ] && source "${DOTFILES}/aliasrc" # aliases

@@ -1,0 +1,87 @@
+#!/bin/sh
+alias \
+    cd='fn_cd' \
+    ka="killall" \
+    mkd="mkdir -pv" \
+    trem="transmission-remote" \
+    e="$EDITOR" \
+    v="$EDITOR" \
+    gua="git remote | xargs -L1 git push --all" \
+    gs='git status' \
+    grep="grep --color=auto" \
+    la='ls -F' \
+    sl="ls -F" \
+    lsa='ls -A' \
+    ll='ls -l' \
+    lsl='ls -l' \
+    diff="diff --color=auto" \
+    ccat="highlight --out-format=ansi" \
+    yt="youtube-dl --add-metadata -i -o '%(upload_date)s-%(title)s.%(ext)s'" \
+    yta="yt -x -f bestaudio/best" \
+    YT="youtube-viewer" \
+    cfv="$EDITOR $HOME/.vimrc" \
+    cfz="$EDITOR $HOME/.zshrc" \
+    cfa="$EDITOR $HOME/.aliasrc" \
+    iterm2="/Applications/iTerm.app/Contents/MacOS/iTerm2 ; exit;" \
+    iTerm2="iterm2" \
+    iterm="iterm2" \
+    all="docker ps -a -q" \
+    python='python3.7 -q' \
+    weather='curl wttr.in' \
+    info='info --vi-keys' \
+    tmux="tmux -f ${DOTFILES}/tmuxrc"
+
+
+# Use neovim for vim if present.
+command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d" alias vi="nvim"
+
+
+
+# start async matrix with Japanese katakana characters
+# source: https://github.com/will8211/unimatrix
+# sudo curl -L https://raw.githubusercontent.com/will8211/unimatrix/master/unimatrix.py -o /usr/local/bin/unimatrix
+# sudo chmod a+rx /usr/local/bin/unimatrix
+alias matrix='unimatrix -naf -s 96 -l k'
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -v" \
+	mkd="mkdir -pv" \
+	yta="yt -x -f bestaudio/best"
+
+# Colorize commands when possible.
+alias \
+	grep="grep --color=auto" \
+    egrep="egrep --color=auto" \
+    fgrep="fgrep --color=auto" \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi"
+
+# These common commands are just too long! Abbreviate them.
+alias \
+	ka="killall" \
+	trem="transmission-remote" \
+	sdn="sudo shutdown -h now" \
+	e="$EDITOR" \
+	v="$EDITOR" \
+
+alias date='date +"%F %T%:z"'
+# e.g. `2019-06-05 13:41:32-07:00`
+
+# DEVELOPMENT
+
+# start CS356 VM in background
+alias fuckvms='VBoxHeadless -s CS356 &'
+
+alias vmssh='ssh -p 3022 trojan@127.0.0.1'
+
+# start cs-104 docker env in current directory
+alias cpup='docker run -ti -v "$(pwd)":/home/work csci104 /bin/bash'
+
+# compile a c++ program with ALL the fucking warnings
+#   usage: compile <FILE>.cpp OR compile <FILE>.cpp -o <FILE>.o
+alias compile='g++ --std=c++11 -Wextra -pedantic -Wall -Wshadow
+            \ -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Werror'
+
