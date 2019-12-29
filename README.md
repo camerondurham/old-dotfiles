@@ -25,9 +25,9 @@ that's usually what I do anyway!
 ![widgets](screenshots/cd.png)
 
 
-I've included plugins pre-installed so the NeoVim config should be
-mostly ready to go. However, a few nice things added are LanguageClient
-configurations will enable for some files, otherwise, ALE will kick in.
+I could include pre-installed plugins but I've chosen to be lasy and use
+a plugin manager. LanguageClient configurations will enable for some files,
+otherwise, ALE will kick in.
 
 NeoVim will also set the column over 80 characters to light grey
 to encourage more readability while coding. I'm using a minimal

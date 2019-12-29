@@ -11,7 +11,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DEFAULTS:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set number
+set number          " show line numbers
 let mapleader = " "
 set cursorline		" highlight current line
 set expandtab		" always use spaces over tabs
@@ -34,6 +34,29 @@ let g:python3_host_prog = '/usr/bin/python3'
 let g:python_host_prog = '/usr/bin/python2'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if ! filereadable(expand('$DOTFILES/nvim/autoload/plug.vim'))
+    echo "Downloading junegunn/vim-plug to manage plugins..."
+    " silence output from command
+    silent !mkdir -p ~/dot/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/dot/nvim/autoload/plug.vim
+    autocmd VimEnter * PlugInstall
+endif
+
+call plug#begin('~/dot/nvim/plugged')
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'rust-lang/rust.vim'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'dense-analysis/ale'
+Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
+call plug#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEYMAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -42,11 +65,6 @@ nnoremap <C-l> :noh<cr>
 vnoremap <C-l> <esc>:noh<cr>
 inoremap <C-l> <esc>:noh<cr>i
 
-" toggle color column
-nnoremap <leader>cc :call ToggleCC()<cr>
-
-" toggle wrap
-nnoremap <leader>w :call ToggleWrap()<cr>
 
 " compile simple c++ program
 nnoremap <f8> :w <cr> :!g++ -std=c++11 -Wall % -o %<.o && ./%<.o <cr>
@@ -95,10 +113,16 @@ map <leader>o :setlocal spell! spelllang=en_us<CR>
 nnoremap <leader>' viw'<esc>bi'<esc>lel
 vnoremap <leader>' <esc>`<i'<esc>`>a'<esc>
 
+" toggle color column
+nnoremap <leader>cc :call ToggleCC()<cr>
+
+" toggle wrap
+nnoremap <leader>w :call ToggleWrap()<cr>
 
 " Set 'formatoptions' to break comment lines but not other lines
-" and not insert comment leader on <CR> but insert when hitting or using "o"
-autocmd FileType * setlocal fo-=cr fo+=oql
+" and not insert comment leader on <CR>
+" add insert when using "o" with fo+=o
+autocmd FileType * setlocal fo-=c fo-=r fo-=o
 
 " ABBREVIATIONS
 iabbrev @@ polytime@icloud.com
@@ -200,7 +224,9 @@ nnoremap <silent> <leader>c :call LanguageClient#textDocument_codeAction()<CR>
 nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
 
 
-
+" NERDTree
+map <leader>n :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COMMANDS
