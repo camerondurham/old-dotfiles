@@ -11,6 +11,7 @@ function _git-status () {
 zle -N _git-status
 bindkey '\eg' _git-status
 
+[ -f "${DOTFILES}/colors" ] && source "${DOTFILES}/colors"
 
 # zle -N zle-line-init
 # zle -N zle-keymap-select
@@ -21,14 +22,38 @@ vim_prompt() {
   fi
 }
 
-PRETTY_PROMPT_CHAR='❯'
+
+#   Simple git prompt sets if there are changes in your
+# branch (sets a green dot) or the number of modified
+# files + if there are untracked files.
+# I forgot where I got this originally but will try to credit!
+
+git_prompt() {
+  BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\(.*\)/\1/')
+
+  # 140 is light magenta
+  if [ ! -z $BRANCH ]; then
+    echo -n "%F{$GIT_BRANCH_COLOR}$BRANCH"
+
+    if [ ! -z "$(git status --short)" ]; then
+        STAGED=$(git status | egrep -c "(modified)|(deleted)|(renamed)|(new file)|(Untracked)")
+        # 146 is light grey/blueish
+        echo " %F{$GIT_CHANGED_COLOR}● %F{$GIT_STAGED_COLOR}($STAGED)"
+          else
+              echo " %F{$GIT_CLEAN_COLOR}●"
+    fi
+  fi
+}
+
+#PS1='
+#$(vim_prompt)%B%F{159}%~$(git_prompt)
+#%B%F{141}$PRETTY_PROMPT_CHAR %F{reset}'
 
 PS1='
-$(vim_prompt)%B%F{159}%~$(git_prompt)
-%B%F{141}$PRETTY_PROMPT_CHAR %F{reset}'
+$(vim_prompt)%B%F{$DIR_COLOR}%~$(git_prompt)
+%B%F{$PROMPT_COLOR}$PRETTY_PROMPT_CHAR %F{reset}'
 
-
-# [ Configure keybindings ]
+# Configure keybindings
 
 bindkey -M viins '^B' vi-backward-char
 bindkey -M viins '^P' vi-up-line-or-history

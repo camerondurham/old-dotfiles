@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# magenta = 141
+# teal/light blue = 159
+# green = 120
+
+DIR_COLOR=159
+PROMPT_COLOR=141
+GIT_BRANCH_COLOR=140
+GIT_STAGED_COLOR=146
+GIT_CHANGED_COLOR='red'
+GIT_CLEAN_COLOR='green'
+
+
+PRETTY_PROMPT_CHAR='❯'

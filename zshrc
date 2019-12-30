@@ -40,28 +40,6 @@ bindkey -e
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
-#   Simple git prompt sets if there are changes in your
-# branch (sets a green dot) or the number of modified
-# files + if there are untracked files.
-# I forgot where I got this originally but will try to credit!
-
-git_prompt() {
-  BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\(.*\)/\1/')
-
-  # 140 is light magenta
-  if [ ! -z $BRANCH ]; then
-    echo -n "%F{140}$BRANCH"
-
-    if [ ! -z "$(git status --short)" ]; then
-        STAGED=$(git status | egrep -c "(modified)|(deleted)|(renamed)|(new file)|(Untracked)")
-        # 146 is light grey/blueish
-        echo " %F{red}● %F{146}($STAGED)"
-          else
-              echo " %F{green}●"
-    fi
-  fi
-}
-
 vim_prompt() {
   if [ ! -z $VIMRUNTIME ]; then
     echo ":%F{green}sh ";

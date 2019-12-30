@@ -1,4 +1,0 @@
-#!/bin/bash
-git add ~/usc-work/vimwiki
-git commit -m "New notes $(date +%Y-%m-%d-%h-%M)"
-git push
