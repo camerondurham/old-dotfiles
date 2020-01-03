@@ -22,6 +22,8 @@ set ignorecase      " make search ignore case
 set undodir=~/.hist/nvim
 set undofile
 
+let g:use_line_guard = 1 " highlight lines over 80 characters
+
 
 autocmd BufReadPost *.rs setlocal filetype=rust
 
@@ -119,7 +121,24 @@ nnoremap <leader>cc :call ToggleCC()<cr>
 " toggle wrap
 nnoremap <leader>w :call ToggleWrap()<cr>
 
-" Set 'formatoptions' to break comment lines but not other lines
+" jump into file-wide substitute
+nnoremap <leader>S :%s///g <left><left><left><left>
+
+" jump into line substitute
+nnoremap <leader>s :s///g <left><left><left><left>
+
+" jump to next <++> marker
+nnoremap <leader><leader> /<++><cr>ce
+
+" intent file and return to current location
+inoremap <leader><leader>i mmgg=G`m
+nnoremap <leader><leader>i mmgg=G`m
+
+" Spell-check set to <leader>o, 'o' for 'orthography':
+map <leader>o :setlocal spell! spelllang=en_us<CR>
+
+
+" Set 'formatoptions' (aka 'fo') to break comment lines but not other lines
 " and not insert comment leader on <CR>
 " add insert when using "o" with fo+=o
 autocmd FileType * setlocal fo-=c fo-=r fo-=o
@@ -283,8 +302,10 @@ endfunction
 " https://tinyurl.com/vy4j37l
 function! ToggleCC()
     if &cc == ''
+        let g:use_line_guard = 1
         call SetLineGuard()
     else
+        let g:use_line_guard = 0
         set cc=
     endif
 endfunction
@@ -322,8 +343,12 @@ endif
 " Open Vexplore windows to take up 15% of the window width
 let g:netrw_winsize = 15
 
+
+" Always set colorcolumn initially
 aug line_guard
     au!
     set cc=
-    call SetLineGuard()
+    if g:use_line_guard
+        call SetLineGuard()
+    endif
 aug END

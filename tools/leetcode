@@ -1,5 +1,19 @@
 #!/bin/bash
-dir="projects/practice/cpp/leetcode"
-if [ $# -lt 1 ]; then echo "Usage $0 <problem number>";exit 1;
-elif [ ! -f "$HOME/$dir/$1.cpp" ]; then cp "$HOME/$dir/0.cpp" "$HOME/$dir/$1.cpp";fi
-cd "$HOME/$dir" && "$EDITOR" "$1.cpp"
+
+# slow, working version of shell script
+
+if [ $# -lt 1 ];
+then echo "Usage $0 <problem number>";
+    exit 1;
+fi;
+
+if [ -z "$PRACTICE_CPP_LEETCODE" ];
+    then echo "PRACTICE_CPP_LEETCODE var not set";
+    exit 1;
+fi;
+
+if [ ! -f "$PRACTICE_CPP_LEETCODE/$1.cpp" ];
+then cp "$PRACTICE_CPP_LEETCODE/leetcode_template.cpp" "$PRACTICE_CPP_LEETCODE/$1.cpp";
+fi;
+cd "$PRACTICE_CPP_LEETCODE"
+nvim "$1.cpp"

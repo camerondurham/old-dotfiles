@@ -107,9 +107,8 @@ export INPUTRC=${DOTFILES}/inputrc
 export HUB_CONFIG=${DOTFILES}/hub/config
 export XDG_CONFIG_HOME=${DOTFILES}
 export HOME=~
+export PRACTICE_CPP_LEETCODE=~/projects/practice/cpp/leetcode
 eval "$(hub alias -s)"
-
-HOMEBREW_EDITOR="code"
 
 # Disable <C-q> & <C-s>
 stty -ixon

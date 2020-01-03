@@ -3,13 +3,15 @@
 # magenta = 141
 # teal/light blue = 159
 # green = 120
+# for all colors: https://tinyurl.com/wqy8y64
 
 DIR_COLOR=159
 PROMPT_COLOR=141
 GIT_BRANCH_COLOR=140
+TMUX_BG_COLOR=98
+TMUX_FG_COLOR=15
 GIT_STAGED_COLOR=146
 GIT_CHANGED_COLOR='red'
 GIT_CLEAN_COLOR='green'
-
 
 PRETTY_PROMPT_CHAR='❯'
