@@ -57,6 +57,10 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ }
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
+Plug 'SirVer/ultisnips'
+
+" Snippets are separated from the engine. Add this if you want them:
+Plug 'honza/vim-snippets'
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -173,6 +177,17 @@ call deoplete#custom#var('omni', 'input_patterns', {
 		    \ 'java': '[^. *\t]\.\w*',
 		    \ 'cpp': '[^. *\t]\.\w*',
 		    \})
+
+" ULTISNIPS
+
+" straight from: https://github.com/SirVer/ultisnips/
+" Trigger configuration.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 
 " LanguageClient-neovim

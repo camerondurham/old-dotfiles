@@ -88,16 +88,16 @@ bindkey -M viins '\ev' edit-command-line
 bindkey -M vicmd '\ev' edit-command-line
 zle -N edit-command-line
 
-#  Toggle Vim session (or last suspended process) with Ctrl-Z
-
-function fg-bg () {
-	if [[ $BUFFER -eq 0 ]]; then
-		fg
-	else
-		zle push-input
-	fi
-}
-
-zle -N fg-bg
-bindkey '^Z' fg-bg
+# #  Toggle Vim session (or last suspended process) with Ctrl-Z
+#
+# function fg-bg () {
+# 	if [[ $BUFFER -eq 0 ]]; then
+# 		fg
+# 	else
+# 		zle push-input
+# 	fi
+# }
+#
+# zle -N fg-bg
+# bindkey '^Z' fg-bg
 

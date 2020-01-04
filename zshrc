@@ -220,6 +220,12 @@ function fg-bg () {
 zle -N fg-bg
 bindkey '^Z' fg-bg
 
+# Create new notes in vim:
+# zet a new note -> ~/Dropbox/notes/<TIMESTAMP>-a-new-note.md
+zet() {
+    nvim "+Zet $*"
+}
+
 # Add dynamic git aliases shamelessly copied from thoughtbot
 
 # No arguments: `git status`
@@ -231,6 +237,7 @@ g() {
     git status
   fi
 }
+
 
 # Complete go like git
 compdef g=git
