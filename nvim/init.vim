@@ -24,16 +24,17 @@ set undofile
 
 let g:use_line_guard = 1 " highlight lines over 80 characters
 
-
 autocmd BufReadPost *.rs setlocal filetype=rust
+
+autocmd FileType *.cpp *.c setlocal cindent
 
 set splitright      " vertical splits always open on right
 set splitbelow      " make horizontal splits always open below
 
 " ENVIRONMENT VARIABLES
-"   Required by deoplete/LanguageClient_neovim
-let g:python3_host_prog = '/usr/bin/python3'
-let g:python_host_prog = '/usr/bin/python2'
+"   IMPORTANT: Required by deoplete/LanguageClient_neovim
+let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python2'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
@@ -156,7 +157,23 @@ iabbrev @@ polytime@icloud.com
 
 " DEOPLETE
 " Use deoplete.
-autocmd FileType *.cpp *.rs let g:deoplete#enable_at_startup = 1
+" autocmd FileType *.cpp *.rs *.py let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
+
+" autocmd FileType *.cpp *.rs *.py setlocal omnifunc=tern#Complete
+
+call deoplete#custom#option('sources', {
+        \ 'rust': ['LanguageClient'],
+        \ 'cpp': ['LanguageClient'],
+        \ 'python': ['LanguageClient']
+        \ })
+
+call deoplete#custom#var('omni', 'input_patterns', {
+		    \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
+		    \ 'java': '[^. *\t]\.\w*',
+		    \ 'cpp': '[^. *\t]\.\w*',
+		    \})
+
 
 " LanguageClient-neovim
 " Required for operations modifying multiple buffers like rename.
@@ -291,30 +308,34 @@ function! SetLineGuard()
         " highlight up to 255 cols, the max in Vim (?)
         " credits to the good people of vi-stackexchange:
         " https://bit.ly/35XMfIM
-        let &colorcolumn="80,".join(range(81,255),",")
+        let &colorcolumn="76,".join(range(77,500),",")
         hi ColorColumn ctermbg=darkgrey
     endif
 endfunction
-
 
 " ColorColumn (cc) is the variable for visual columns
 " Must use syntax call <FUNC_NAME>() to use viml functions
 " https://tinyurl.com/vy4j37l
 function! ToggleCC()
-    if &cc == ''
-        let g:use_line_guard = 1
-        call SetLineGuard()
-    else
+    " if &cc == ''
+    if g:use_line_guard
         let g:use_line_guard = 0
         set cc=
+        echom("Toggle CC off")
+    else
+        let g:use_line_guard = 1
+        call SetLineGuard()
+        echom("Toggle CC on")
     endif
 endfunction
 
 function! ToggleWrap()
     if &wrap == 0
         set wrap
+        echom("Toggle Line Wrap On")
     else
         set nowrap
+        echom("Toggle Line Wrap Off")
     endif
 endfunction
 
@@ -328,7 +349,7 @@ endfunction
 " VISUAL CUSTOMIZATION AUGROUPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme paramount
+colorscheme monochrome        " other fav is paramount
 
 if has('folding')
 	if has('windows')
