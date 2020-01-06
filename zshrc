@@ -226,6 +226,12 @@ zet() {
     nvim "+Zet $*"
 }
 
+# Edit new leetcode:
+# lc 0982 some little problem -> ~/projects/practice/cpp/leetcode/0982_some_little_problem.cpp
+lc() {
+    nvim "+LC $*"
+}
+
 # Add dynamic git aliases shamelessly copied from thoughtbot
 
 # No arguments: `git status`

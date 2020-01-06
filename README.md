@@ -24,7 +24,6 @@ that's usually what I do anyway!
 
 ![widgets](screenshots/cd.png)
 
-
 I could include pre-installed plugins but I've chosen to be lasy and use
 a plugin manager. LanguageClient configurations will enable for some files,
 otherwise, ALE will kick in.
@@ -34,6 +33,27 @@ to encourage more readability while coding. I'm using a minimal
 color-scheme (paramount) that happend to be my favorite colors.
 
 ![nvim](screenshots/nvim_config.png)
+
+### Utility
+
+Inspired by [this article](https://vimways.org/2019/personal-notetaking-in-vim/)
+I have added a brittle notetaking method to create timestamped notes:
+
+```shell
+zet a new note
+
+# this command effectively is:
+nvim ~/Dropbox/notes/<TIMESTAMP>-a-new-note.md
+```
+
+Similarly, I have a brittle way to do leetcode problems:
+
+```shell
+$ lc 0982 some little problem
+$ cp <LEETCODE_DIR>/leetcode_template.cpp <LEETCODE_DIR>/0982_some_little_problem.cpp
+$ nvim <LEETCODE_DIR>/0982_some_little_problem.cpp
+```
+
 
 ## Miscellaneous
 

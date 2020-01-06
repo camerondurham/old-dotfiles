@@ -21,6 +21,8 @@ set shiftwidth=4    " let indent be 2 spaces
 set ignorecase      " make search ignore case
 set undodir=~/.hist/nvim
 set undofile
+set autochdir       " set workingdir wherever open file lives
+" manually toggle with `:set autochdir!`
 
 let g:use_line_guard = 1 " highlight lines over 80 characters
 
@@ -31,10 +33,16 @@ autocmd FileType *.cpp *.c setlocal cindent
 set splitright      " vertical splits always open on right
 set splitbelow      " make horizontal splits always open below
 
-" ENVIRONMENT VARIABLES
-"   IMPORTANT: Required by deoplete/LanguageClient_neovim
-let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
-let g:python_host_prog = '/usr/local/bin/python2'
+set wildmenu        " command-line completion in vim
+
+" Don't offer to open certain files/directories
+set wildignore+=*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico
+set wildignore+=*.pdf,*.psd
+set wildignore+=node_modules/*,
+
+" `gf` opens file under cursor in a new vertical split
+" nnoremap gf :vertical wincmd f<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
@@ -43,25 +51,33 @@ if ! filereadable(expand('$DOTFILES/nvim/autoload/plug.vim'))
     echo "Downloading junegunn/vim-plug to manage plugins..."
     " silence output from command
     silent !mkdir -p ~/dot/nvim/autoload/
-	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/dot/nvim/autoload/plug.vim
+    silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > ~/dot/nvim/autoload/plug.vim
     autocmd VimEnter * PlugInstall
 endif
 
 call plug#begin('~/dot/nvim/plugged')
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'rust-lang/rust.vim'
 Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+            \ 'branch': 'next',
+            \ 'do': 'bash install.sh',
+            \ }
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
+" " Snippets are separated from the engine. Add this if you want them:
+" Plug 'honza/vim-snippets'
 
-" Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+
+Plug 'mileszs/ack.vim'
 call plug#end()
+
+" ENVIRONMENT VARIABLES
+"   IMPORTANT: Required by deoplete/LanguageClient_neovim
+let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python2'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEYMAPS
@@ -79,9 +95,9 @@ nnoremap <f8> :w <cr> :!g++ -std=c++11 -Wall % -o %<.o && ./%<.o <cr>
 "   set scroll-up and scroll-down
 " to vim window not terminal window
 set mouse=nicr          "   enable mouse in normal,
-                        " insert, cmd, replace modes
+" insert, cmd, replace modes
 " set nowrap            "   disable line wrapping
-                        " (so there's something to scroll to)
+" (so there's something to scroll to)
 
 " set escape shortcut key
 " Note: inoremap jk <esc> " commenting here makes bad sh*t happen
@@ -158,51 +174,73 @@ iabbrev @@ polytime@icloud.com
 " FYI: cannot add to runtimepath
 " Packages searched for in: ~/.local/share/nvim/site/pack
 
+" ACK.VIM
+" Usage
+" :Ack [options] {pattern} [{directories}]
+
+" search in notes directory
+inoremap <leader>z <esc>:Ack  ~/Dropbox/notes/ <c-b><c-b><right><right><right><right>
 
 " DEOPLETE
 " Use deoplete.
 " autocmd FileType *.cpp *.rs *.py let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_at_startup = 1
 
+let g:deoplete#enable_refresh_always = 1
+
 " autocmd FileType *.cpp *.rs *.py setlocal omnifunc=tern#Complete
 
 call deoplete#custom#option('sources', {
-        \ 'rust': ['LanguageClient'],
-        \ 'cpp': ['LanguageClient'],
-        \ 'python': ['LanguageClient']
-        \ })
-
-call deoplete#custom#var('omni', 'input_patterns', {
-		    \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
-		    \ 'java': '[^. *\t]\.\w*',
-		    \ 'cpp': '[^. *\t]\.\w*',
-		    \})
+            \ 'rust': ['LanguageClient'],
+            \ 'cpp': ['LanguageClient'],
+            \ 'python': ['LanguageClient']
+            \ })
 
 " ULTISNIPS
 
-" straight from: https://github.com/SirVer/ultisnips/
-" Trigger configuration.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" Plugin key-mappings.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+" SuperTab like snippets behavior.
+" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+    set conceallevel=2 concealcursor=niv
+endif
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+let g:neosnippet#enable_completed_snippet = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/dot/nvim/plugin/snippets'
 
 
-" LanguageClient-neovim
+" LANGUAGECLIENT-NEOVIM
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
 
 " LANG-SERVER: CPP CONFIGURATION
+
 " Disable ALE for all LanguageClient clients
 if executable('clangd')
     au User lsp_setup call lsp#register_server({
-        \ 'name': 'clangd',
-        \ 'cmd': {server_info->['clangd', '-background-index']},
-        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-        \ })
+                \ 'name': 'clangd',
+                \ 'cmd': {server_info->['clangd', '-background-index']},
+                \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                \ })
 endif
 
 
@@ -212,27 +250,20 @@ let g:ale_pattern_options = {
             \ '\.cpp$': {'ale_enabled' : 0},
             \ '\.rs$':  {'ale_enabled' : 0},
             \ '\.py$':  {'ale_enabled' : 0},
-\}
-
-autocmd BufEnter *.cpp let g:ale_enabled = 0
-autocmd BufEnter *.rs let g:ale_enabled = 0
+            \}
 
 " LANG-SERVER: RUST CONFIGURATION
 " See https://github.com/autozimu/LanguageClient-neovim
 "
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'cpp': ['clangd'],
-    \ 'python': ['/usr/local/bin/pyls'],
-\ }
-
+            \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+            \ 'cpp': ['clangd'],
+            \ 'python': ['/usr/local/bin/pyls'],
+            \ }
 
 " Rust format on save:
 let g:rustfmt_autosave = 1
 
-" Don't show inline errors. See:
-" https://github.com/autozimu/LanguageClient-neovim/issues/719
-" let g:LanguageClient_useVirtualText=1
 
 " Stop annoying diagnostics sign popups, use virtual text with prefix instead
 " source: https://github.com/L0stLink/anvil/blob/master/settings/LanguageClient-neovim.vim
@@ -275,10 +306,6 @@ nnoremap <silent> <leader>c :call LanguageClient#textDocument_codeAction()<CR>
 nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
 
 
-" NERDTree
-map <leader>n :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COMMANDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -291,8 +318,8 @@ command! -nargs=1 H tab help <args>
 
 " Set help menu to open in vertical split
 aug helpfiles
-  au!
-  au BufEnter */doc/* if &filetype=='help' | winc L | endif
+    au!
+    au BufEnter */doc/* if &filetype=='help' | winc L | endif
 aug END
 
 " Automatically delete all trailing whitespace on save.
@@ -302,9 +329,9 @@ autocmd BufWritePre * %s/\s\+$//e
 " Don't do it for commit messages, when the position is invalid, or when
 " inside an event handler (happens when dropping a file on gvim). (thoughtbot)
 autocmd BufReadPost *
-    \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
+            \ if &ft != 'gitcommit' && line("'\"") > 0 && line("'\"") <= line("$") |
+            \   exe "normal g`\"" |
+            \ endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -312,7 +339,7 @@ autocmd BufReadPost *
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! FileExists(FileName)
-	return !empty(glob(a:FileName))
+    return !empty(glob(a:FileName))
 endfunction
 
 function! SetLineGuard()
@@ -367,12 +394,12 @@ endfunction
 colorscheme monochrome        " other fav is paramount
 
 if has('folding')
-	if has('windows')
-		set fillchars=vert:┃  " BOX DRAWINGS VERTICAL (U+2503)
-                              " for unbroken window lines
-	endif
-	set foldmethod=indent     " DUMBEST BUT FASTEST FOLD METHOD
-	set foldlevelstart=99
+    if has('windows')
+        set fillchars=vert:┃  " BOX DRAWINGS VERTICAL (U+2503)
+        " for unbroken window lines
+    endif
+    set foldmethod=indent     " DUMBEST BUT FASTEST FOLD METHOD
+    set foldlevelstart=99
 endif
 
 
