@@ -64,13 +64,9 @@ Plug 'autozimu/LanguageClient-neovim', {
             \ }
 Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
-" Plug 'SirVer/ultisnips'
-" " Snippets are separated from the engine. Add this if you want them:
-" Plug 'honza/vim-snippets'
-
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-
+Plug 'junegunn/goyo.vim'
 Plug 'mileszs/ack.vim'
 call plug#end()
 
@@ -178,15 +174,17 @@ iabbrev @@ polytime@icloud.com
 " Usage
 " :Ack [options] {pattern} [{directories}]
 
+
+" Don't jump to first result immediately
+cnoreabbrev Ack Ack!
+
 " search in notes directory
-inoremap <leader>z <esc>:Ack  ~/Dropbox/notes/ <c-b><c-b><right><right><right><right>
+nnoremap <leader>z <esc>:Ack!  ~/Dropbox/notes/ <c-b><c-b><right><right><right><right>
 
 " DEOPLETE
 " Use deoplete.
 " autocmd FileType *.cpp *.rs *.py let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_at_startup = 1
-
-let g:deoplete#enable_refresh_always = 1
 
 " autocmd FileType *.cpp *.rs *.py setlocal omnifunc=tern#Complete
 
@@ -204,7 +202,7 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-" SuperTab like snippets behavior.
+    " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 "imap <expr><TAB>
 " \ pumvisible() ? "\<C-n>" :
@@ -214,9 +212,9 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
             \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " For conceal markers.
-if has('conceal')
-    set conceallevel=2 concealcursor=niv
-endif
+"if has('conceal')
+"    set conceallevel=2 concealcursor=niv
+"endif
 
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -225,7 +223,6 @@ let g:neosnippet#enable_completed_snippet = 1
 
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/dot/nvim/plugin/snippets'
-
 
 " LANGUAGECLIENT-NEOVIM
 " Required for operations modifying multiple buffers like rename.
@@ -267,29 +264,6 @@ let g:rustfmt_autosave = 1
 
 " Stop annoying diagnostics sign popups, use virtual text with prefix instead
 " source: https://github.com/L0stLink/anvil/blob/master/settings/LanguageClient-neovim.vim
-let g:LanguageClient_diagnosticsSignsMax = 0
-let g:LanguageClient_hasSnippetSupport = 1
-let g:LanguageClient_useFloatingHover = 1
-let g:LanguageClient_useVirtualText = 1
-let g:LanguageClient_hasSnippetSupport = 1
-let g:LanguageClient_changeThrottle = 0.5
-let g:LanguageClient_virtualTextPrefix = "    ••➜ "
-let g:LanguageClient_diagnosticsList = "Location"
-let g:LanguageClient_selectionUI = "location-list"
-let g:LanguageClient_hoverpreview = "Always"
-
-
-" Language Server Status
-
-" Bindings for LanguageClient-neovim
-augroup bind_ls_actions
-    autocmd!
-    " Use language server with supported file types
-    autocmd FileType javascript,python setlocal omnifunc=LanguageClient#complete
-    " Update lightline on LC diagnostic update
-    autocmd User LanguageClientDiagnosticsChanged call lightline#update()
-augroup end
-"""
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
@@ -333,6 +307,11 @@ autocmd BufReadPost *
             \   exe "normal g`\"" |
             \ endif
 
+" Turn on spell check for markdown files
+aug spelling
+    au!
+    au BufEnter *.md setlocal spell spelllang=en_us
+aug END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIMSCRIPT FUNCTIONS
@@ -391,7 +370,7 @@ endfunction
 " VISUAL CUSTOMIZATION AUGROUPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme monochrome        " other fav is paramount
+colorscheme paramount        " other fav is monochrome
 
 if has('folding')
     if has('windows')

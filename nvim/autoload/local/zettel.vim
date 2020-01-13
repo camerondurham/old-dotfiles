@@ -20,4 +20,5 @@ func! local#zettel#edit(...)
     else
         exec "normal gg0\<c-r>=strftime('%Y-%m-%d %H:%M')\<cr>\<cr>\<esc>G"
     endif
+
 endfunc
