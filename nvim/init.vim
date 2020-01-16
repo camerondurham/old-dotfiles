@@ -68,6 +68,7 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'junegunn/goyo.vim'
 Plug 'mileszs/ack.vim'
+Plug 'axelf4/vim-strip-trailing-whitespace'
 call plug#end()
 
 " ENVIRONMENT VARIABLES
@@ -153,6 +154,9 @@ nnoremap <leader><leader>i mmgg=G`m
 
 " Spell-check set to <leader>o, 'o' for 'orthography':
 map <leader>o :setlocal spell! spelllang=en_us<CR>
+
+" Open current file in chrome
+nnoremap <F12> :exe ':silent !open -a "Google Chrome" %'<CR>
 
 
 " Set 'formatoptions' (aka 'fo') to break comment lines but not other lines
@@ -297,7 +301,9 @@ aug helpfiles
 aug END
 
 " Automatically delete all trailing whitespace on save.
-autocmd BufWritePre * %s/\s\+$//e
+" Not using compatibility problem when working in team git repos
+" use :StripTrailingWhitespace to force
+" autocmd BufWritePre * %s/\s\+$//e
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it for commit messages, when the position is invalid, or when

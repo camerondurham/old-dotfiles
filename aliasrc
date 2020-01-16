@@ -87,6 +87,9 @@ alias cpup='docker run -ti -v "$HOME/cs104/":/home/work -w /home/work/ csci104 /
 # start cs-104 docker image in cs104 directory
 alias cpstartup='docker run -v "$HOME/cs104/":/work/ -dt --cap-add SYS_PTRACE --security-opt seccomp=unconfined --name csci104 csci104'
 
+# start up itp compiler development vm
+alias compiler='docker run -it -v "$(pwd)":/root/uscc/code -w /root/uscc/code compiler /bin/bash'
+
 # compile a c++ program with ALL the fucking warnings
 #   usage: compile <FILE>.cpp OR compile <FILE>.cpp -o <FILE>.o
 alias compile='g++ --std=c++11 -Wextra -pedantic -Wall -Wshadow
