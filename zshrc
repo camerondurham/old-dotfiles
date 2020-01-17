@@ -40,6 +40,10 @@ bindkey -e
 bindkey '^a' beginning-of-line
 bindkey '^e' end-of-line
 
+# move into directory by typing its name w/o `cd`
+setopt  autocd autopushd
+
+
 vim_prompt() {
   if [ ! -z $VIMRUNTIME ]; then
     echo ":%F{green}sh ";
@@ -108,6 +112,7 @@ export HUB_CONFIG=${DOTFILES}/hub/config
 export XDG_CONFIG_HOME=${DOTFILES}
 export HOME=~
 export PRACTICE_CPP_LEETCODE=~/projects/practice/cpp/leetcode
+export ITP439=~/projects/uscc-camerondurham
 eval "$(hub alias -s)"
 
 # Disable <C-q> & <C-s>

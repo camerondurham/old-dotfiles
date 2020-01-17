@@ -70,6 +70,16 @@ alias \
 alias date='date +"%F %T%:z"'
 # e.g. `2019-06-05 13:41:32-07:00`
 
+# SCHOOL SHORTCUTS
+
+# These single shortcuts jump me to the right directory
+alias \
+    web="cd ~/projects/itp303/" \
+    comp="cd ~/projects/uscc-camerondurham/" \
+    ai="cd ~/projects/ai/" \
+    os="cd ~/projects/cs350-docker/"
+
+
 # DEVELOPMENT
 
 # start CS356 VM in background
@@ -88,10 +98,9 @@ alias cpup='docker run -ti -v "$HOME/cs104/":/home/work -w /home/work/ csci104 /
 alias cpstartup='docker run -v "$HOME/cs104/":/work/ -dt --cap-add SYS_PTRACE --security-opt seccomp=unconfined --name csci104 csci104'
 
 # start up itp compiler development vm
-alias compiler='docker run -it -v "$(pwd)":/root/uscc/code -w /root/uscc/code compiler /bin/bash'
+alias compiler='docker run -it -v "$ITP439":/root/uscc/code -w /root/uscc/code compiler /bin/bash'
 
 # compile a c++ program with ALL the fucking warnings
 #   usage: compile <FILE>.cpp OR compile <FILE>.cpp -o <FILE>.o
 alias compile='g++ --std=c++11 -Wextra -pedantic -Wall -Wshadow
             \ -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Werror'
-
