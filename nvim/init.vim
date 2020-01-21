@@ -56,7 +56,8 @@ if ! filereadable(expand('$DOTFILES/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/dot/nvim/plugged')
-Plug 'tpope/vim-commentary'j
+
+Plug 'tpope/vim-commentary'
 Plug 'rust-lang/rust.vim'
 Plug 'autozimu/LanguageClient-neovim', {
             \ 'branch': 'next',
@@ -70,8 +71,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'mileszs/ack.vim'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'tmsvg/pear-tree'
-Plug 'tpope/vim-markdown', { 'for': 'markdown' }
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
+Plug 'tpope/vim-markdown'
 call plug#end()
 
 " ENVIRONMENT VARIABLES
@@ -313,6 +313,9 @@ let g:pear_tree_timeout = 60
 
 " Automatically map <BS>, <CR>, and <Esc>
 let g:pear_tree_map_special_keys = 1
+
+" VIM-MARKDOWN
+let g:markdown_fenced_languages = [ 'html', 'python', 'bash=sh' ]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COMMANDS

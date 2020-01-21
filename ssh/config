@@ -12,6 +12,6 @@ Host vm
   Port 3022
 
 Host arch
-  HostName 192.168.1.21
+  HostName 192.168.1.128
   User cameron
   Port 22

@@ -94,8 +94,11 @@ alias todo='grep -Ri "todo[:\ ]" .'
 # start cs-104 docker env in cs104 directory and start working in /home/work
 alias cpup='docker run -ti -v "$HOME/cs104/":/home/work -w /home/work/ csci104 /bin/bash'
 
+alias cphere='docker run -ti -v "$(pwd)":/home/work -w /home/work/ csci104 /bin/bash'
+
 # start cs-104 docker image in cs104 directory
-alias cpstartup='docker run -v "$HOME/cs104/":/work/ -dt --cap-add SYS_PTRACE --security-opt seccomp=unconfined --name csci104 csci104'
+# alias cpstartup='docker run -v "$HOME/cs104/":/work/ -dt --cap-add SYS_PTRACE --security-opt seccomp=unconfined --name csci104 csci104'
+alias cpstartup='docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -v "$(pwd)":/home/work -w /home/work csci104 /bin/bash'
 
 # start up itp compiler development vm
 alias compiler='docker run -it -v "$ITP439":/root/uscc/code -w /root/uscc/code compiler /bin/bash'
@@ -105,5 +108,8 @@ alias compiler='docker run -it -v "$ITP439":/root/uscc/code -w /root/uscc/code c
 alias compile='g++ --std=c++11 -Wextra -pedantic -Wall -Wshadow
             \ -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Werror'
 
-alias supos='docker run -it -v "$HOME/projects/cs350/":/root -w /root --name cs350 cs350 /bin/bash'
-alias osup='docker run -it -v "$HOME/projects/cs350/":/root -w /root cs350 /bin/bash'
+alias supos='docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined -v "$HOME/projects/cs350/":/root -w /root --name cs350 cs350 /bin/bash'
+
+alias osup='docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined  -v "$HOME/projects/cs350/":/root -w /root cs350 /bin/bash'
+
+alias oshere='docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined  -v "$(pwd)":/root -w /root cs350 /bin/bash'
