@@ -77,7 +77,7 @@ alias \
     web="cd ~/projects/itp303/" \
     comp="cd ~/projects/uscc-camerondurham/" \
     ai="cd ~/projects/ai/" \
-    os="cd ~/projects/cs350-docker/"
+    os="cd ~/projects/cs350/"
 
 
 # DEVELOPMENT
@@ -104,3 +104,6 @@ alias compiler='docker run -it -v "$ITP439":/root/uscc/code -w /root/uscc/code c
 #   usage: compile <FILE>.cpp OR compile <FILE>.cpp -o <FILE>.o
 alias compile='g++ --std=c++11 -Wextra -pedantic -Wall -Wshadow
             \ -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel -Werror'
+
+alias supos='docker run -it -v "$HOME/projects/cs350/":/root -w /root --name cs350 cs350 /bin/bash'
+alias osup='docker run -it -v "$HOME/projects/cs350/":/root -w /root cs350 /bin/bash'

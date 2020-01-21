@@ -56,7 +56,7 @@ if ! filereadable(expand('$DOTFILES/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/dot/nvim/plugged')
-Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-commentary'j
 Plug 'rust-lang/rust.vim'
 Plug 'autozimu/LanguageClient-neovim', {
             \ 'branch': 'next',
@@ -69,6 +69,9 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'junegunn/goyo.vim'
 Plug 'mileszs/ack.vim'
 Plug 'axelf4/vim-strip-trailing-whitespace'
+Plug 'tmsvg/pear-tree'
+Plug 'tpope/vim-markdown', { 'for': 'markdown' }
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 call plug#end()
 
 " ENVIRONMENT VARIABLES
@@ -283,6 +286,33 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <leader>c :call LanguageClient#textDocument_codeAction()<CR>
 nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
 
+" PEAR-TREE (auto pairing)
+" Default rules for matching:
+let g:pear_tree_pairs = {
+            \ '(': {'closer': ')'},
+            \ '[': {'closer': ']'},
+            \ '{': {'closer': '}'},
+            \ "'": {'closer': "'"},
+            \ '"': {'closer': '"'}
+            \ }
+" See pear-tree/after/ftplugin/ for filetype-specific matching rules
+
+" Pear Tree is enabled for all filetypes by default:
+let g:pear_tree_ft_disabled = []
+
+" Pair expansion is dot-repeatable by default:
+let g:pear_tree_repeatable_expand = 1
+
+" Smart pairs are disabled by default:
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
+
+" If enabled, smart pair functions timeout after 60ms:
+let g:pear_tree_timeout = 60
+
+" Automatically map <BS>, <CR>, and <Esc>
+let g:pear_tree_map_special_keys = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COMMANDS
@@ -389,8 +419,11 @@ endif
 
 
 " Open Vexplore windows to take up 15% of the window width
-let g:netrw_winsize = 15
+" let g:netrw_winsize = 15
 
+" Open netrw file in vertical split
+" :h netrw-v and :h netrw_altv
+let g:netrw_altv=1
 
 " Always set colorcolumn initially
 aug line_guard
