@@ -127,6 +127,8 @@ export CDPATH=.:$HOME/Dropbox:$HOME:~/site:$HOME/projects:$HOME/dot:$HOME/Dropbo
 
 # Add anaconda to path
 export PATH="/usr/local/anaconda3/bin:$PATH"
+# Add ruby to path
+export PATH="/Users/camerondurham/.gem/ruby/2.6.0/bin:$PATH"
 # Add rust to system path
 export PATH="$HOME/.cargo/bin:$PATH"
 # Add Rust completion engine RACER to path

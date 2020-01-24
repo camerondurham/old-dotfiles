@@ -67,10 +67,9 @@ Plug 'dense-analysis/ale'
 Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'junegunn/goyo.vim'
 Plug 'mileszs/ack.vim'
 Plug 'axelf4/vim-strip-trailing-whitespace'
-Plug 'tmsvg/pear-tree'
+" Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-vinegar'
 call plug#end()
@@ -202,31 +201,31 @@ call deoplete#custom#option('sources', {
             \ 'python': ['LanguageClient']
             \ })
 
-" ULTISNIPS
+" NEOSNIPPET
 
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+"" Plugin key-mappings.
+"" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <expr><TAB>
- \ pumvisible() ? "\<C-n>" :
- \ neosnippet#expandable_or_jumpable() ?
- \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+""" TESTING OPTIONS
+"autocmd InsertLeave * NeoSnippetClearMarkers
+"snoremap <silent><ESC>  <ESC>:NeoSnippetClearMarkers<CR>
+"set completeopt-=preview
+"""
+
+"" Enable snipMate compatibility feature.
+"let g:neosnippet#enable_snipmate_compatibility = 1
+
+let g:neosnippet#enable_completed_snippet = 1
+let g:neosnippet#enable_complete_done = 1
 
 
-" Enable snipMate compatibility feature.
-" let g:neosnippet#enable_snipmate_compatibility = 1
-
-" let g:neosnippet#enable_completed_snippet = 1
-
-" " Tell Neosnippet about the other snippets
-" let g:neosnippet#snippets_directory='~/dot/nvim/plugin/snippets'
+""" DON'T REMOVE
+"" " Tell Neosnippet about the other snippets
+"let g:neosnippet#snippets_directory='~/dot/nvim/plugin/snippets'
 
 " LANGUAGECLIENT-NEOVIM
 " Required for operations modifying multiple buffers like rename.
@@ -282,31 +281,6 @@ nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <leader>c :call LanguageClient#textDocument_codeAction()<CR>
 nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
-
-" PEAR-TREE (auto pairing)
-" Default rules for matching:
-let g:pear_tree_pairs = {
-            \ '(': {'closer': ')'},
-            \ '[': {'closer': ']'},
-            \ '{': {'closer': '}'},
-            \ "'": {'closer': "'"},
-            \ '"': {'closer': '"'}
-            \ }
-" See pear-tree/after/ftplugin/ for filetype-specific matching rules
-
-" Pear Tree is enabled for all filetypes by default:
-let g:pear_tree_ft_disabled = []
-
-" Pair expansion is dot-repeatable by default:
-let g:pear_tree_repeatable_expand = 1
-
-" Smart pairs are disabled by default:
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
-
-" If enabled, smart pair functions timeout after 60ms:
-let g:pear_tree_timeout = 60
 
 " Automatically map <BS>, <CR>, and <Esc>
 let g:pear_tree_map_special_keys = 1
