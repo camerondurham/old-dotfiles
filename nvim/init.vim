@@ -24,7 +24,7 @@ set undofile
 set autochdir       " set workingdir wherever open file lives
 " manually toggle with `:set autochdir!`
 
-let g:use_line_guard = 1 " highlight lines over 80 characters
+let g:use_line_guard = 0 " highlight lines over 80 characters
 
 autocmd BufReadPost *.rs setlocal filetype=rust
 
@@ -72,6 +72,7 @@ Plug 'mileszs/ack.vim'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'tmsvg/pear-tree'
 Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-vinegar'
 call plug#end()
 
 " ENVIRONMENT VARIABLES
@@ -209,27 +210,23 @@ imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
-    " SuperTab like snippets behavior.
+" SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+imap <expr><TAB>
+ \ pumvisible() ? "\<C-n>" :
+ \ neosnippet#expandable_or_jumpable() ?
+ \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-" For conceal markers.
-"if has('conceal')
-"    set conceallevel=2 concealcursor=niv
-"endif
 
 " Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
+" let g:neosnippet#enable_snipmate_compatibility = 1
 
-let g:neosnippet#enable_completed_snippet = 1
+" let g:neosnippet#enable_completed_snippet = 1
 
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/dot/nvim/plugin/snippets'
+" " Tell Neosnippet about the other snippets
+" let g:neosnippet#snippets_directory='~/dot/nvim/plugin/snippets'
 
 " LANGUAGECLIENT-NEOVIM
 " Required for operations modifying multiple buffers like rename.
@@ -280,7 +277,7 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
 " Or map each action separately
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition({'gotoCmd': 'split'})<CR>
 nnoremap <silent> gr :call LanguageClient#textDocument_references()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <leader>c :call LanguageClient#textDocument_codeAction()<CR>
@@ -426,7 +423,7 @@ endif
 
 " Open netrw file in vertical split
 " :h netrw-v and :h netrw_altv
-let g:netrw_altv=1
+" let g:netrw_altv=1
 
 " Always set colorcolumn initially
 aug line_guard
