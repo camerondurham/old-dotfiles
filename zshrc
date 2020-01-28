@@ -257,3 +257,4 @@ compdef g=git
 
 # source aliases after function definitions
 [ -f "${DOTFILES}/aliasrc" ] && source "${DOTFILES}/aliasrc" # aliases
+export PATH="/usr/local/opt/python@3.8/bin:$PATH"

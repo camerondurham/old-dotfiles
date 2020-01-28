@@ -69,9 +69,11 @@ Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'mileszs/ack.vim'
 Plug 'axelf4/vim-strip-trailing-whitespace'
-" Plug 'tmsvg/pear-tree'
-Plug 'tpope/vim-markdown'
+Plug 'tmsvg/pear-tree'
+" Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-vinegar'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 " ENVIRONMENT VARIABLES
@@ -210,11 +212,7 @@ smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 
-""" TESTING OPTIONS
-"autocmd InsertLeave * NeoSnippetClearMarkers
-"snoremap <silent><ESC>  <ESC>:NeoSnippetClearMarkers<CR>
 "set completeopt-=preview
-"""
 
 "" Enable snipMate compatibility feature.
 "let g:neosnippet#enable_snipmate_compatibility = 1
@@ -223,9 +221,7 @@ let g:neosnippet#enable_completed_snippet = 1
 let g:neosnippet#enable_complete_done = 1
 
 
-""" DON'T REMOVE
-"" " Tell Neosnippet about the other snippets
-"let g:neosnippet#snippets_directory='~/dot/nvim/plugin/snippets'
+let g:neosnippet#snippets_directory='~/dot/nvim/plugin/snippets'
 
 " LANGUAGECLIENT-NEOVIM
 " Required for operations modifying multiple buffers like rename.
@@ -258,6 +254,7 @@ let g:ale_pattern_options = {
 let g:LanguageClient_serverCommands = {
             \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
             \ 'cpp': ['clangd'],
+            \ 'c': ['clangd'],
             \ 'python': ['/usr/local/bin/pyls'],
             \ }
 
@@ -286,7 +283,21 @@ nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
 let g:pear_tree_map_special_keys = 1
 
 " VIM-MARKDOWN
-let g:markdown_fenced_languages = [ 'html', 'python', 'bash=sh' ]
+let g:markdown_fenced_languages = [ 'html', 'python', 'bash=sh', 'c++=cpp', 'viml=vim']
+
+" lets `ge` command foollow named anchors like
+" file#anchor or #anchor
+let g:vim_markdown_follow_anchor = 1
+let g:vim_markdown_math = 1
+let g:vim_markdown_strikethrough = 1
+
+" follow links with implicit .md
+" open [link text](link-url) open link-url.md
+let g:vim_markdown_no_extensions_in_markdown = 1
+
+let g:vim_markdown_autowrite = 1
+
+let g:vim_markdown_edit_url_in = 'tab'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COMMANDS
