@@ -97,6 +97,7 @@ files=(
   "zprofile"
   "zshenv"
   "zshrc"
+  "alacritty.yml"
 )
 
 for file in "${files[@]}"; do
