@@ -3,11 +3,11 @@
 
 set -g default-terminal "screen-256color"
 
-# set -g status-bg black
-# set -g status-fg white
+set -g status-bg colour238
+set -g status-fg white
 
-set -g status-bg colour135
-set -g status-fg colour233
+# set -g status-bg colour135
+# set -g status-fg colour233
 
 set -g mode-keys vi
 set -g history-limit 10000
@@ -49,3 +49,34 @@ set -g renumber-windows on
 # enable mouse support for switching panes/windows
 setw -g mouse on
 
+# thanks to https://github.com/nicknisi/dotfiles/blob/master/tmux/theme.sh
+tm_color_active=colour15
+tm_color_inactive=colour241
+tm_color_feature=colour135
+
+tm_color_music=colour248
+tm_active_border_color=colour240
+
+# separators
+tm_separator_left_bold="◀"
+tm_separator_left_thin="❮"
+tm_separator_right_bold="▶"
+tm_separator_right_thin="❯"
+
+
+# pane number display
+set-option -g display-panes-active-colour $tm_color_active
+set-option -g display-panes-colour $tm_color_inactive
+
+# clock
+set-window-option -g clock-mode-colour $tm_color_active
+
+# cut 18 chars from current playing song
+tm_tunes="#[fg=$tm_color_music]#(osascript -l JavaScript ~/dot/tools/tunes.js | cut -c 1-18)"
+
+tm_date="#[fg=$tm_color_inactive] %R %d %b"
+tm_host="#[fg=$tm_color_feature,bold]#h"
+tm_session_name="#[fg=$tm_color_feature,bold]#S"
+
+set -g status-left $tm_session_name' '
+set -g status-right $tm_tunes' '$tm_date' '$tm_host

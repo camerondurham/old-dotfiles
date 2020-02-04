@@ -1,6 +1,6 @@
 # README
 
-![fullscreen.png](screenshots/fullscreen.png)
+![window.png](screenshots/window.png)
 
 ## Not much but still a README! :)
 
@@ -19,25 +19,31 @@ In a git directory, there's a simple heads-up:
 
 ![git](screenshots/git_status_prompt.png)
 
+Inspired by Nick Nisi (ok, I like basically just grabbed his tmux prompt and applescript), I there's
+a simple script that grabs the currently playing Spotify song
+and displays the title.
+
+![music.png](screenshots/music.png)
+
 Whenever you `cd` into a new directory, this simply runs `ls` since
 that's usually what I do anyway!
 
 ![widgets](screenshots/cd.png)
 
-I could include pre-installed plugins but I've chosen to be lasy and use
+I could include pre-installed plugins but I've chosen to be lazy and use
 a plugin manager. LanguageClient configurations will enable for some files,
 otherwise, ALE will kick in.
 
 NeoVim will also set the column over 80 characters to light grey
 to encourage more readability while coding. I'm using a minimal
-color-scheme (paramount) that happend to be my favorite colors.
+color-scheme (paramount) that happened to be my favorite colors.
 
 ![nvim](screenshots/nvim_config.png)
 
 ### Utility
 
 Inspired by [this article](https://vimways.org/2019/personal-notetaking-in-vim/)
-I have added a brittle notetaking method to create timestamped notes:
+I have added a brittle note taking method to create timestamped notes:
 
 ```shell
 zet a new note
@@ -59,8 +65,10 @@ $ nvim <LEETCODE_DIR>/0982_some_little_problem.cpp
 
 ### Terminal
 
-I highly recommend the `iTerm2` terminal on macOS. The file
-`icing/Profiles.json` has my current iTerm2 profiles used in the screenshots.
+I have migrated from `iTerm2` to the much faster and more lightweight `Alacritty`.
+The config file is already included in this repository.
+
+The file `icing/Profiles.json` has my former iTerm2 profiles used in the screenshots.
 
 
 ### Background

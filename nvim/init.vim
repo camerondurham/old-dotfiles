@@ -70,10 +70,10 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'mileszs/ack.vim'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'tmsvg/pear-tree'
-Plug 'tpope/vim-vinegar'
+" Plug 'tpope/vim-vinegar'
+Plug 'preservim/nerdtree'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 call plug#end()
@@ -389,7 +389,19 @@ let g:mkdp_port = ''
 " ${name} will be replace with the file name
 let g:mkdp_page_title = '「${name}」'
 
-"" END VIM MARKDOWN PREVIEW
+" END VIM MARKDOWN PREVIEW
+
+" NERDTREE
+map <C-n> :NERDTreeToggle<CR>
+
+" automatically close vim if only window open is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" prettify
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+" END NERDTREE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COMMANDS
