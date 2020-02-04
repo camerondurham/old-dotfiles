@@ -75,7 +75,7 @@ alias date='date +"%F %T%:z"'
 # These single shortcuts jump me to the right directory
 alias \
     web="cd ~/projects/itp303/" \
-    comp="cd ~/projects/uscc-camerondurham/" \
+    comp="cd ~/projects/itp439/" \
     ai="cd ~/projects/ai/" \
     os="cd ~/projects/cs350/"
 
