@@ -97,7 +97,6 @@ files=(
   "zprofile"
   "zshenv"
   "zshrc"
-  "alacritty.yml"
 )
 
 for file in "${files[@]}"; do
@@ -147,5 +146,8 @@ if [[ $(realpath ~/.vim) != $(realpath ${dot}/vim) ]]; then
 fi
 
 mkdir -p ~/.hist/nvim
+mkdir -p ~/.config/alacritty
+
+ln -s ../alacritty.yml ~/.config/alacritty/alacritty.yml
 
 set +e
