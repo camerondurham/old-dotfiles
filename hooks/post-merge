@@ -148,6 +148,6 @@ fi
 mkdir -p ~/.hist/nvim
 mkdir -p ~/.config/alacritty
 
-ln -s ../alacritty.yml ~/.config/alacritty/alacritty.yml
+update  ${dot}/alacritty.yml ~/.config/alacritty/alacritty.yml
 
 set +e
