@@ -29,7 +29,8 @@ alias \
     python='python3.7 -q' \
     weather='curl wttr.in' \
     info='info --vi-keys' \
-    tmux="tmux -f ${DOTFILES}/tmuxrc"
+    tmux="tmux -f ${DOTFILES}/tmuxrc"A
+    ta="tmux attach"
 
 
 # Use neovim for vim if present.

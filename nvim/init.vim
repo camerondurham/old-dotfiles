@@ -15,9 +15,9 @@ set number          " show line numbers
 let mapleader = " "
 set cursorline		" highlight current line
 set expandtab		" always use spaces over tabs
-set softtabstop=4   " use soft tabs with 2 spaces
-set tabstop=4       " view tabs as 2 space
-set shiftwidth=4    " let indent be 2 spaces
+set softtabstop=2   " use soft tabs with 2 spaces
+set tabstop=2       " view tabs as 2 space
+set shiftwidth=2    " let indent be 2 spaces
 set ignorecase      " make search ignore case
 set undodir=~/.hist/nvim
 set undofile
@@ -105,7 +105,7 @@ set mouse=nicr          "   enable mouse in normal,
 
 " set escape shortcut key
 " Note: inoremap jk <esc> " commenting here makes bad sh*t happen
-inoremap jk <esc>
+" inoremap jk <esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LEADER KEYMAPS
@@ -161,6 +161,10 @@ nnoremap <leader><leader>i mmgg=G`m
 
 " Spell-check set to <leader>o, 'o' for 'orthography':
 map <leader>o :setlocal spell! spelllang=en_us<CR>
+
+" Turn off all syntax checking
+nnoremap <leader>O <esc>:LanguageClientStop<CR><esc>:ALEDisable<CR>
+vnoremap <leader>O <esc>:LanguageClientStop<CR><esc>:ALEDisable<CR>
 
 " Open current file in chrome
 nnoremap <F12> :exe ':silent !open -a "Google Chrome" %'<CR>
