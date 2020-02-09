@@ -29,7 +29,7 @@ alias \
     python='python3.7 -q' \
     weather='curl wttr.in' \
     info='info --vi-keys' \
-    tmux="tmux -f ${DOTFILES}/tmuxrc"A
+    tmux="tmux -f ${DOTFILES}/tmuxrc"
     ta="tmux attach"
 
 

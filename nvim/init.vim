@@ -15,14 +15,20 @@ set number          " show line numbers
 let mapleader = " "
 set cursorline		" highlight current line
 set expandtab		" always use spaces over tabs
-set softtabstop=2   " use soft tabs with 2 spaces
-set tabstop=2       " view tabs as 2 space
-set shiftwidth=2    " let indent be 2 spaces
+set softtabstop=4   " use soft tabs with 2 spaces
+set tabstop=4       " view tabs as 2 space
+set shiftwidth=4    " let indent be 2 spaces
 set ignorecase      " make search ignore case
 set undodir=~/.hist/nvim
 set undofile
 set autochdir       " set workingdir wherever open file lives
 " manually toggle with `:set autochdir!`
+
+" set indents to two spaces
+autocmd FileType *.c setlocal softtabstop=2
+autocmd FileType *.c setlocal tabstop=2
+autocmd FileType *.c setlocal shiftwidth=2
+
 
 let g:use_line_guard = 0 " highlight lines over 80 characters
 
