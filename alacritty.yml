@@ -131,12 +131,6 @@ key_bindings:
   - { key: Minus,  mods: Command,         action: DecreaseFontSize }
   - { key: K,      mods: Command,         action: ClearHistory     }
   - { key: K,      mods: Command,         chars: "\x0c"            }
-  - { key: V,      mods: Command,         action: Paste            }
-  - { key: C,      mods: Command,         action: Copy             }
-  - { key: H,      mods: Command,         action: Hide             }
-  - { key: Q,      mods: Command,         action: Quit             }
-  - { key: W,      mods: Command,         action: Quit             }
-  - { key: F,      mods: Command|Control, action: ToggleFullscreen }
     # ---- Custom stuff ----
     # Fix `#` symbol not working on macOS, or at least with specific Alacritty version
   - { key: Key3,   mods: Alt,     chars: "\x23"                    }
