@@ -28,6 +28,9 @@ set autochdir       " set workingdir wherever open file lives
 autocmd FileType *.c setlocal softtabstop=2
 autocmd FileType *.c setlocal tabstop=2
 autocmd FileType *.c setlocal shiftwidth=2
+autocmd FileType *.h setlocal softtabstop=2
+autocmd FileType *.h setlocal tabstop=2
+autocmd FileType *.h setlocal shiftwidth=2
 
 
 let g:use_line_guard = 0 " highlight lines over 80 characters
@@ -74,19 +77,18 @@ Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'mileszs/ack.vim'
-Plug 'axelf4/vim-strip-trailing-whitespace'
 Plug 'tmsvg/pear-tree'
-" Plug 'tpope/vim-vinegar'
 Plug 'preservim/nerdtree'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
-
+Plug 'arzg/vim-substrata'
 call plug#end()
 
 " ENVIRONMENT VARIABLES
 "   IMPORTANT: Required by deoplete/LanguageClient_neovim
-let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
+" let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
+let g:python3_host_prog = '/usr/local/opt/python@3.8/bin/python3.8'
 let g:python_host_prog = '/usr/local/bin/python2'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -201,6 +203,8 @@ cnoreabbrev Ack Ack!
 
 " search in notes directory
 nnoremap <leader>z <esc>:Ack!  ~/Dropbox/notes/ <c-b><c-b><right><right><right><right>
+" I guess f for find???
+nnoremap <leader>f <esc>:Ack!  ./ <c-b><c-b><right><right><right><right>
 
 " DEOPLETE
 " Use deoplete.
@@ -213,7 +217,8 @@ call deoplete#custom#option('sources', {
             \ 'rust': ['LanguageClient'],
             \ 'cpp': ['LanguageClient'],
             \ 'python': ['LanguageClient'],
-            \ 'c' : ['LanguageClient']
+            \ 'c' : ['LanguageClient'],
+            \ 'javascript' : ['LanguageClient']
             \ })
 
 " NEOSNIPPET
@@ -273,7 +278,26 @@ let g:LanguageClient_serverCommands = {
             \ 'cpp': ['clangd'],
             \ 'c': ['clangd'],
             \ 'python': ['/usr/local/bin/pyls'],
+            \ 'javascript' : ['javascript-typescript-stdio'],
+            \ 'typescript' : ['javascript-typescript-stdio'],
             \ }
+" may have to setup root markers for these files
+let g:LanguageClient_rootMarkers = {
+    \ 'javascript': ['jsconfig.json'],
+    \ 'typescript': ['tsconfig.json'],
+\ }
+
+" example CONFIGURATION
+" {
+"   "compilerOptions": {
+"     "target": "es6",
+"     "checkJs": true,
+"     "allowSyntheticDefaultImports": true
+"   },
+"   "include": ["src/**/*"],
+"   "exclude": ["node_modules"]
+" }
+
 
 " Rust format on save:
 let g:rustfmt_autosave = 1
@@ -429,10 +453,7 @@ aug helpfiles
     au BufEnter */doc/* if &filetype=='help' | winc L | endif
 aug END
 
-" Automatically delete all trailing whitespace on save.
-" Not using compatibility problem when working in team git repos
-" use :StripTrailingWhitespace to force
-" autocmd BufWritePre * %s/\s\+$//e
+autocmd BufWritePre * %s/\s\+$//e
 
 " When editing a file, always jump to the last known cursor position.
 " Don't do it for commit messages, when the position is invalid, or when

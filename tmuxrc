@@ -2,6 +2,7 @@
 # from https://unix.stackexchange.com/questions/60968/tmux-bottom-bar-color-change
 
 set -g default-terminal "screen-256color"
+set-option -sa terminal-overrides "xterm-256color:RGB"
 
 set -g status-bg colour238
 set -g status-fg white

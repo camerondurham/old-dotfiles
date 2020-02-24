@@ -26,7 +26,8 @@ alias \
     iTerm2="iterm2" \
     iterm="iterm2" \
     all="docker ps -a -q" \
-    python='python3.7 -q' \
+    python='python3.8 -q' \
+    python3='python3.8 -q' \
     weather='curl wttr.in' \
     info='info --vi-keys' \
     tmux="tmux -f ${DOTFILES}/tmuxrc"
