@@ -16,7 +16,7 @@ set-option -sg escape-time 10
 set-option -g default-terminal "screen-256color"
 
 # use | and - to split windows
-bind-key \ split-window -h -c '#{pane_current_path}'
+bind-key \\ split-window -h -c '#{pane_current_path}'
 bind-key - split-window -v -c '#{pane_current_path}'
 unbind '"'
 unbind %

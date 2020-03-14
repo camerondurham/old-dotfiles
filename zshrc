@@ -125,6 +125,8 @@ export GPG_TTY=$(tty)
 # Configure environments that can be CD'd into at all times
 export CDPATH=.:$HOME/Dropbox:$HOME:~/site:$HOME/projects:$HOME/dot:$HOME/Dropbox/notes
 
+# Add my shitty little run script to the path despite it being brittle & lazy
+export PATH="/Users/camerondurham/projects/cs350-docker/run.sh:$PATH"
 # Add anaconda to path
 export PATH="/usr/local/anaconda3/bin:$PATH"
 # Add ruby to path
