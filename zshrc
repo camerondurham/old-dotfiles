@@ -112,6 +112,7 @@ export HUB_CONFIG=${DOTFILES}/hub/config
 export XDG_CONFIG_HOME=${DOTFILES}
 export HOME=~
 export PRACTICE_CPP_LEETCODE=~/projects/practice/cpp/leetcode
+export CS350_DOCKER_PROJECT=~/projects/cs350/project-3-cdurham_lee344_cmake/xv6-public-master
 export ITP439=~/projects/uscc-camerondurham
 eval "$(hub alias -s)"
 

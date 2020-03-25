@@ -135,4 +135,4 @@ key_bindings:
     # Fix `#` symbol not working on macOS, or at least with specific Alacritty version
   - { key: Key3,   mods: Alt,     chars: "\x23"                    }
     # Open new window easily with <cmd><n>
-  - { key: N,      mods: Command, command: { program: "open", args: ["-n", "/Applications/Alacritty.app"] } }
+  # - { key: N,      mods: Command, command: { program: "open", args: ["-n", "/Applications/Alacritty.app"] } }

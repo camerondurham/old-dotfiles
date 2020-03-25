@@ -91,6 +91,7 @@ rm -rf ~/.bash_{"profile","history","login","sessions"}
 files=(
   "config"
   "nvim"
+  "gdbinit"
   "inputrc"
   "vimrc"
   "zlerc"
