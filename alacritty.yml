@@ -5,6 +5,15 @@
 env:
   TERM: xterm-256color
 
+
+shell:
+    program: /usr/local/bin/zsh
+    args:
+      - -l
+      - -c
+      - "tmux attach || tmux -f ~/dot/tmuxrc"
+
+
 window:
   dimensions:
     columns: 140
@@ -37,7 +46,7 @@ font:
   #   family: Hack Nerd Font Mono
   #   style: Bold
 
-  size: 16.5
+  size: 14.5
 
   offset:
     x: 4
@@ -102,9 +111,9 @@ mouse:
   url:
     modifiers: None
 
-# selection:
-#   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-#   save_to_clipboard: true
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>"
+  save_to_clipboard: true
 
 dynamic_title: true
 

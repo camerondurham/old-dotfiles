@@ -94,8 +94,8 @@ myip() {
 }
 
 # Set vi as the default editor
-VISUAL="vi"
-EDITOR="vi"
+VISUAL="vim"
+EDITOR="vim"
 PAGER="less"
 
 # Call the function to set the path, without adding new variables to the shell
@@ -260,5 +260,6 @@ compdef g=git
 
 # source aliases after function definitions
 [ -f "${DOTFILES}/aliasrc" ] && source "${DOTFILES}/aliasrc" # aliases
+export PATH="/usr/local/share/python/:$PATH"
 export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 export PATH="/usr/local/opt/sqlite/bin:$PATH"

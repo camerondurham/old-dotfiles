@@ -13,7 +13,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number          " show line numbers
 let mapleader = " "
-set cursorline		" highlight current line
+" set cursorline		" highlight current line
 set expandtab		" always use spaces over tabs
 set softtabstop=4   " use soft tabs with 2 spaces
 set tabstop=4       " view tabs as 2 space
@@ -78,7 +78,6 @@ Plug 'Shougo/deoplete.nvim', { 'do' : ':UpdateRemotePlugins' }
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'mileszs/ack.vim'
-Plug 'tmsvg/pear-tree'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 call plug#end()
@@ -319,13 +318,11 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <leader>c :call LanguageClient#textDocument_codeAction()<CR>
 nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
 
-" Automatically map <BS>, <CR>, and <Esc>
-let g:pear_tree_map_special_keys = 1
 
 " VIM-MARKDOWN
 let g:markdown_fenced_languages = [ 'html', 'python', 'bash=sh', 'c++=cpp', 'viml=vim']
 
-" lets `ge` command foollow named anchors like
+" lets `ge` command follow named anchors like
 " file#anchor or #anchor
 let g:vim_markdown_follow_anchor = 1
 let g:vim_markdown_math = 1
