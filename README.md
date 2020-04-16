@@ -62,6 +62,8 @@ $ nvim <LEETCODE_DIR>/0982_some_little_problem.cpp
 
 ## Miscellaneous
 
+![keyboard](screenshots/magicforce49keyboard_web.jpeg)
+
 ### Keyboard Layout
 
 I've added a my custom keyboard layout to make the inexpensive 40% `Magicforce40` keyboard
