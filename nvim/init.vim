@@ -99,7 +99,7 @@ inoremap <C-l> <esc>:noh<cr>i
 
 
 " compile simple c++ program
-nnoremap <f8> :w <cr> :!g++ -std=c++11 -Wall % -o %<.o && ./%<.o <cr>
+nnoremap <f8> :w <cr> :!g++ -std=c++14 -Wall % -o %<.o && ./%<.o <cr>
 
 "   set scroll-up and scroll-down
 " to vim window not terminal window

@@ -20,8 +20,7 @@ In a git directory, there's a simple heads-up:
 ![git](screenshots/git_status_prompt.png)
 
 Inspired by Nick Nisi (ok, I like basically just grabbed his tmux prompt and applescript), I there's
-a simple script that grabs the currently playing Spotify song
-and displays the title.
+a simple script that grabs the currently playing Spotify song and displays the title.
 
 ![music.png](screenshots/music.png)
 
@@ -62,6 +61,14 @@ $ nvim <LEETCODE_DIR>/0982_some_little_problem.cpp
 
 
 ## Miscellaneous
+
+### Keyboard Layout
+
+I've added a my custom keyboard layout to make the inexpensive 40% `Magicforce40` keyboard
+easier to use on macOS. Unfortunately, the keyboard's layout is not detected by Catalina
+and the function key does not work as expected. Instead, these special keys will be enabled
+when pressing the `Alt/Option` key, which usually enables special characters not normally
+used by programmers.
 
 ### Terminal
 
