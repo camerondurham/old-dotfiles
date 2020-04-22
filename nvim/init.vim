@@ -84,7 +84,6 @@ call plug#end()
 
 " ENVIRONMENT VARIABLES
 "   IMPORTANT: Required by deoplete/LanguageClient_neovim
-" let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
 let g:python3_host_prog = '/usr/local/opt/python@3.8/bin/python3.8'
 let g:python_host_prog = '/usr/local/bin/python2'
 
@@ -219,6 +218,17 @@ call deoplete#custom#option('sources', {
             \ 'javascript' : ['LanguageClient']
             \ })
 
+" ALE
+
+" https://github.com/dense-analysis/ale/issues/1176
+" Don't check executables multiple times and cache loading failure/success
+let g:ale_cache_executable_check_failures = 1
+
+" choose which ale linters to use
+let g:ale_linters = { 'tex' : ['chktex', 'lacheck', 'proselint', 'texlab', 'vale']}
+
+" ----------
+
 " NEOSNIPPET
 
 "" Plugin key-mappings.
@@ -238,6 +248,8 @@ let g:neosnippet#enable_complete_done = 1
 
 
 let g:neosnippet#snippets_directory='~/dot/nvim/plugin/snippets'
+
+" ----------
 
 " LANGUAGECLIENT-NEOVIM
 " Required for operations modifying multiple buffers like rename.
@@ -279,22 +291,15 @@ let g:LanguageClient_serverCommands = {
             \ 'javascript' : ['javascript-typescript-stdio'],
             \ 'typescript' : ['javascript-typescript-stdio'],
             \ }
-" may have to setup root markers for these files
-let g:LanguageClient_rootMarkers = {
-    \ 'javascript': ['jsconfig.json'],
-    \ 'typescript': ['tsconfig.json'],
-\ }
 
-" example CONFIGURATION
-" {
-"   "compilerOptions": {
-"     "target": "es6",
-"     "checkJs": true,
-"     "allowSyntheticDefaultImports": true
-"   },
-"   "include": ["src/**/*"],
-"   "exclude": ["node_modules"]
-" }
+let g:LanguageClient_changeThrottle = 0.5
+let g:LanguageClient_useFloatingHover = 1
+let g:LanguageClient_useVirtualText = "All"
+let g:LanguageClient_virtualTextPrefix = "    ••➜ "
+let g:LanguageClient_diagnosticsList = "Location"
+let g:LanguageClient_selectionUI = "location-list"
+let g:LanguageClient_hoverpreview = "Always"
+
 
 
 " Rust format on save:
@@ -318,6 +323,7 @@ nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <leader>c :call LanguageClient#textDocument_codeAction()<CR>
 nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
 
+" ----------
 
 " VIM-MARKDOWN
 let g:markdown_fenced_languages = [ 'html', 'python', 'bash=sh', 'c++=cpp', 'viml=vim']
@@ -335,18 +341,6 @@ let g:vim_markdown_no_extensions_in_markdown = 1
 let g:vim_markdown_autowrite = 1
 
 let g:vim_markdown_edit_url_in = 'tab'
-
-" " NERDTREE
-" map <C-n> :NERDTreeToggle<CR>
-
-" " automatically close vim if only window open is NERDTree
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-" " prettify
-" let g:NERDTreeDirArrowExpandable = '▸'
-" let g:NERDTreeDirArrowCollapsible = '▾'
-
-" " END NERDTREE
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COMMANDS
@@ -383,11 +377,6 @@ aug END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIMSCRIPT FUNCTIONS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-function! FileExists(FileName)
-    return !empty(glob(a:FileName))
-endfunction
-
 function! SetLineGuard()
     if exists('+colorcolumn')
         " clear color column
@@ -425,12 +414,6 @@ function! ToggleWrap()
         set nowrap
         echom("Toggle Line Wrap Off")
     endif
-endfunction
-
-" Compile basic C++ programs
-function! CompileCPP()
-    " TODO
-    echom 'LOL not finished yet :)'
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -3,3 +3,4 @@ env
 .DS_Store
 neofetch
 asciinema/install-id
+nvim/logs/*
