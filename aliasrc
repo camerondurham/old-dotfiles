@@ -22,9 +22,6 @@ alias \
     cfv="$EDITOR $HOME/.vimrc" \
     cfz="$EDITOR $HOME/.zshrc" \
     cfa="$EDITOR $HOME/.aliasrc" \
-    iterm2="/Applications/iTerm.app/Contents/MacOS/iTerm2 ; exit;" \
-    iTerm2="iterm2" \
-    iterm="iterm2" \
     all="docker ps -a -q" \
     python='python3.8 -q' \
     python3='python3.8 -q' \
@@ -80,6 +77,7 @@ alias \
     comp="cd ~/projects/itp439/" \
     ai="cd ~/projects/ai/" \
     os="cd ~/projects/cs350/project-4-cdurham_lee344"
+    osd="cd ~/projects/cs350-docker"
 
 
 # DEVELOPMENT

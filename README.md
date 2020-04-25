@@ -62,16 +62,6 @@ $ nvim <LEETCODE_DIR>/0982_some_little_problem.cpp
 
 ## Miscellaneous
 
-![keyboard](screenshots/magicforce49keyboard_web.jpeg)
-
-### Keyboard Layout
-
-I've added a my custom keyboard layout to make the inexpensive 40% `Magicforce40` keyboard
-easier to use on macOS. Unfortunately, the keyboard's layout is not detected by Catalina
-and the function key does not work as expected. Instead, these special keys will be enabled
-when pressing the `Alt/Option` key, which usually enables special characters not normally
-used by programmers.
-
 ### Terminal
 
 I have migrated from `iTerm2` to the much faster and more lightweight `Alacritty`.
