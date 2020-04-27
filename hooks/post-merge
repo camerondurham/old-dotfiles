@@ -98,6 +98,7 @@ files=(
   "zprofile"
   "zshenv"
   "zshrc"
+  "shpotify.cfg"
 )
 
 for file in "${files[@]}"; do
