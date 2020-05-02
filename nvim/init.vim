@@ -80,6 +80,12 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+
+Plug 'cocopon/iceberg.vim'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 call plug#end()
 
 " ENVIRONMENT VARIABLES
@@ -292,7 +298,7 @@ let g:LanguageClient_serverCommands = {
             \ 'typescript' : ['javascript-typescript-stdio'],
             \ }
 
-let g:LanguageClient_changeThrottle = 0.5
+let g:LanguageClient_changeThrottle = 2
 let g:LanguageClient_useFloatingHover = 1
 let g:LanguageClient_useVirtualText = "All"
 let g:LanguageClient_virtualTextPrefix = "    ••➜ "
@@ -419,6 +425,12 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VISUAL CUSTOMIZATION AUGROUPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" statusline
+let airline_theme='dark_minimal'
+set t_Co=256
+let g:airline_powerline_fonts = 1
 
 colorscheme paramount        " other fav is monochrome
 
