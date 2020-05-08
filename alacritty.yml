@@ -16,8 +16,8 @@ shell:
 
 window:
   dimensions:
-    columns: 140
-    lines: 50
+    columns: 200
+    lines: 57
 
   padding:
     x: 5
@@ -37,8 +37,10 @@ tabspaces: 4
 font:
   normal:
     # family: DejaVu Sans Mono SW
-    family: Input Mono Narrow
-    style: Thin
+    # family: Input Mono Narrow
+    # style: Thin
+    family: Fira Mono for Powerline
+    style: Regular
   # italic:
   #   family: Hack Nerd Font Mono
   #   style: Italic
@@ -46,11 +48,11 @@ font:
   #   family: Hack Nerd Font Mono
   #   style: Bold
 
-  size: 14.5
+  size: 11.5
 
   offset:
-    x: 4
-    y: 4
+    x: 5
+    y: 5
 
   glyph_offset:
     x: 0

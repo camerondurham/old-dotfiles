@@ -1,11 +1,12 @@
+source-file ~/dot/tmux/iceberg.tmux.conf
 
 # from https://unix.stackexchange.com/questions/60968/tmux-bottom-bar-color-change
 
 set -g default-terminal "screen-256color"
 set-option -sa terminal-overrides "xterm-256color:RGB"
 
-set -g status-bg colour238
-set -g status-fg white
+# set -g status-bg colour238
+# set -g status-fg white
 
 # set -g status-bg colour135
 # set -g status-fg colour233
@@ -69,15 +70,16 @@ tm_separator_right_thin="❯"
 set-option -g display-panes-active-colour $tm_color_active
 set-option -g display-panes-colour $tm_color_inactive
 
+# disable temporarily for testing
 # clock
-set-window-option -g clock-mode-colour $tm_color_active
+# set-window-option -g clock-mode-colour $tm_color_active
 
-# cut 18 chars from current playing song
-tm_tunes="#[fg=$tm_color_music]#(osascript -l JavaScript ~/dot/tools/tunes.js | cut -c 1-18)"
+# # cut 18 chars from current playing song
+# tm_tunes="#[fg=$tm_color_music]#(osascript -l JavaScript ~/dot/tools/tunes.js | cut -c 1-18)"
 
-tm_date="#[fg=$tm_color_inactive] %R %d %b"
-tm_host="#[fg=$tm_color_feature,bold]#h"
-tm_session_name="#[fg=$tm_color_feature,bold]#S"
+# tm_date="#[fg=$tm_color_inactive] %R %d %b"
+# tm_host="#[fg=$tm_color_feature,bold]#h"
+# tm_session_name="#[fg=$tm_color_feature,bold]#S"
 
-set -g status-left $tm_session_name' '
-set -g status-right $tm_tunes' '$tm_date' '$tm_host
+# set -g status-left $tm_session_name' '
+# set -g status-right $tm_tunes' '$tm_date' '$tm_host

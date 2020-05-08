@@ -32,7 +32,6 @@ autocmd FileType *.h setlocal softtabstop=2
 autocmd FileType *.h setlocal tabstop=2
 autocmd FileType *.h setlocal shiftwidth=2
 
-
 let g:use_line_guard = 0 " highlight lines over 80 characters
 
 autocmd BufReadPost *.rs setlocal filetype=rust
@@ -81,10 +80,15 @@ Plug 'mileszs/ack.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
+Plug 'junegunn/goyo.vim'
+
+Plug 'gkeep/iceberg-dark'
+Plug 'itchyny/lightline.vim'
 Plug 'cocopon/iceberg.vim'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -139,6 +143,13 @@ nnoremap <leader>c ddO
 
 " make current uppercase
 nnoremap <leader>u viwU
+
+" use php/html filetypes easier
+nnoremap <leader>h :set ft=html<cr>
+nnoremap <leader>p :set ft=php<cr>
+
+" Toggle Goyo
+nnoremap <leader>g :Goyo <cr>
 
 " rot13 the whole file
 " nnoremap <leader>g mmggg?G`m
@@ -298,7 +309,7 @@ let g:LanguageClient_serverCommands = {
             \ 'typescript' : ['javascript-typescript-stdio'],
             \ }
 
-let g:LanguageClient_changeThrottle = 2
+let g:LanguageClient_changeThrottle = 1
 let g:LanguageClient_useFloatingHover = 1
 let g:LanguageClient_useVirtualText = "All"
 let g:LanguageClient_virtualTextPrefix = "    ••➜ "
@@ -392,7 +403,7 @@ function! SetLineGuard()
         " credits to the good people of vi-stackexchange:
         " https://bit.ly/35XMfIM
         let &colorcolumn="76,".join(range(77,500),",")
-        hi ColorColumn ctermbg=darkgrey
+        hi ColorColumn ctermbg=black
     endif
 endfunction
 
@@ -427,12 +438,22 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" statusline
-let airline_theme='dark_minimal'
-set t_Co=256
-let g:airline_powerline_fonts = 1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" STATUSLINE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme paramount        " other fav is monochrome
+if !has('gui_running')
+  set t_Co=256
+endif
+
+" get rid of --INSERT -- since it's not needed anymore
+set noshowmode
+
+
+colorscheme iceberg
+let g:lightline = { 'colorscheme': 'icebergDark' }
+
+hi Normal guibg=NONE ctermbg=NONE
 
 if has('folding')
     if has('windows')
