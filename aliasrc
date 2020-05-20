@@ -74,19 +74,13 @@ alias date='date +"%F %T%:z"'
 # These single shortcuts jump me to the right directory
 alias \
     web="cd ~/projects/itp303/" \
-    comp="cd ~/projects/itp439/" \
-    ai="cd ~/projects/ai/" \
     os="cd ~/projects/cs350/project-4-cdurham_lee344" \
     osd="cd ~/projects/cs350-docker" \
-    fp="cd ~/projects/itp303/final_project/" \
+    ccd="cd ~/projects/practice/problems" \
+
 
 
 # DEVELOPMENT
-
-# start CS356 VM in background
-alias fuckvms='VBoxHeadless -s CS356 &'
-
-alias vmssh='ssh -p 3022 trojan@127.0.0.1'
 
 # dump todo lists into a folder
 # TODO: make into a script
@@ -114,5 +108,3 @@ alias supos='docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfin
 alias osup='docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined  -v "$HOME/projects/cs350/":/root -w /root cs350_32 /bin/bash'
 
 alias oshere='docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined  -v "$(pwd)":/root -w /root cs350_32 /bin/bash'
-
-alias sandbox='cd ~/projects/sandbox/'

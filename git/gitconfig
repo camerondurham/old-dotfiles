@@ -5,7 +5,7 @@
   signingkey = "8275A77226E2BB73"
 [core]
   excludesfile = ~/.gitignore
-  editor = code --wait
+  editor = vim
   hooksPath = hooks
 [commit]
   gpgsign = true

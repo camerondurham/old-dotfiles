@@ -9,7 +9,7 @@ func! local#zettel#edit(...)
     if len(a:000) > 0
         let l:sep = '-'
     endif
-    let l:fname = expand('~/Dropbox/notes/') . strftime("%F-%H%M") . l:sep . join(a:000, '-') . '.md'
+    let l:fname = expand('$NOTES_DIR') . strftime("%F-%H%M") . l:sep . join(a:000, '-') . '.md'
 
     " edit the new file
     exec "e " . l:fname

@@ -112,7 +112,9 @@ export HUB_CONFIG=${DOTFILES}/hub/config
 export XDG_CONFIG_HOME=${DOTFILES}
 export HOME=~
 export PRACTICE_CPP_LEETCODE=~/projects/practice/cpp/leetcode
+export NOTES_DIR=~/Google\ Drive\ File\ Stream/My\ Drive/notes/
 export CS350_DOCKER_PROJECT=~/projects/cs350/project-4-cdurham_lee344/xv6-public/
+export CP_PRACTICE=~/projects/practice/cp_problems
 export ITP439=~/projects/uscc-camerondurham
 eval "$(hub alias -s)"
 
@@ -124,7 +126,7 @@ stty -ixon
 export GPG_TTY=$(tty)
 
 # Configure environments that can be CD'd into at all times
-export CDPATH=.:$HOME/Dropbox:$HOME:~/site:$HOME/projects:$HOME/dot:$HOME/Dropbox/notes
+export CDPATH=.:$HOME:~/site:$HOME/projects:$HOME/dot:$HOME/Google\ Drive\ File\ Stream/My\ Drive/notes/:$HOME/projects/practice:
 
 # Add my shitty little run script to the path despite it being brittle & lazy
 export PATH="/Users/camerondurham/projects/cs350-docker/run.sh:$PATH"
@@ -190,9 +192,6 @@ gpg-agent --daemon &>/dev/null
 # Used to communicate with the SSH agent
 export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 
-# TODO:
-# alias for starting CS350 docker image
-
 # Colorize directory listings
 ls() {
   if [[ $(uname -s) == 'Darwin' ]]; then
@@ -240,6 +239,11 @@ zet() {
 # lc 0982 some little problem -> ~/projects/practice/cpp/leetcode/0982_some_little_problem.cpp
 lc() {
     nvim "+LC $*"
+}
+
+# Edit new competitive programming problem
+ccp() {
+    nvim "+CCP $*"
 }
 
 # Add dynamic git aliases shamelessly copied from thoughtbot

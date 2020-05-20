@@ -33,10 +33,11 @@ autocmd FileType *.h setlocal tabstop=2
 autocmd FileType *.h setlocal shiftwidth=2
 
 let g:use_line_guard = 0 " highlight lines over 80 characters
+let g:spell_check_markdown = 0
 
 autocmd BufReadPost *.rs setlocal filetype=rust
 
-autocmd FileType *.cpp *.c setlocal cindent
+" autocmd FileType *.cpp *.c setlocal cindent
 
 set splitright      " vertical splits always open on right
 set splitbelow      " make horizontal splits always open below
@@ -86,10 +87,6 @@ Plug 'gkeep/iceberg-dark'
 Plug 'itchyny/lightline.vim'
 Plug 'cocopon/iceberg.vim'
 
-
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-
 call plug#end()
 
 " ENVIRONMENT VARIABLES
@@ -106,9 +103,19 @@ nnoremap <C-l> :noh<cr>
 vnoremap <C-l> <esc>:noh<cr>
 inoremap <C-l> <esc>:noh<cr>i
 
+" trying out how well this works
+inoremap {<CR> {<CR>}<Esc>O
 
-" compile simple c++ program
-nnoremap <f8> :w <cr> :!g++ -std=c++14 -Wall % -o %<.o && ./%<.o <cr>
+
+" compile simple c++ program -- csci104 compliant
+autocmd filetype cpp nnoremap <f8> :w <cr> :!g++ -std=c++11 -Wall % -o %<.o && ./%<.o <cr>
+
+" from William Lin's github repo -- codejam compliant
+"   %:r is a filename modifier in vim that strips the extension
+"       ex: A.cpp becomes A
+"   --stack specifies the allowed stack size in the running program (?)
+autocmd filetype cpp nnoremap <f9> :w <bar> !g++ -std=c++14 % -o %:r -Wall<CR>
+
 
 "   set scroll-up and scroll-down
 " to vim window not terminal window
@@ -216,7 +223,7 @@ iabbrev @@ polytime@icloud.com
 cnoreabbrev Ack Ack!
 
 " search in notes directory
-nnoremap <leader>z <esc>:Ack!  ~/Dropbox/notes/ <c-b><c-b><right><right><right><right>
+nnoremap <leader>z <esc>:Ack! /Users/camerondurham/Google\ Drive\ File\ Stream/My\ Drive/notes/ <c-b><c-b><right><right><right><right>
 " I guess f for find???
 nnoremap <leader>f <esc>:Ack!  ./ <c-b><c-b><right><right><right><right>
 
@@ -262,7 +269,6 @@ set completeopt-=preview
 
 let g:neosnippet#enable_completed_snippet = 1
 let g:neosnippet#enable_complete_done = 1
-
 
 let g:neosnippet#snippets_directory='~/dot/nvim/plugin/snippets'
 
@@ -385,10 +391,13 @@ autocmd BufReadPost *
             \   exe "normal g`\"" |
             \ endif
 
+
 " Turn on spell check for markdown files
 aug spelling
     au!
-    au BufEnter *.md setlocal spell spelllang=en_us
+    if g:spell_check_markdown
+        au BufEnter *.md setlocal spell spelllang=en_us
+    endif
 aug END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""

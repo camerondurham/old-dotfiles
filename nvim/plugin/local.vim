@@ -3,3 +3,5 @@
 command! -nargs=* Zet call local#zettel#edit(<f-args>)
 
 command! -nargs=* LC call local#leetcode#edit(<f-args>)
+
+command! -nargs=* CCP call local#ccp#edit(<f-args>)
