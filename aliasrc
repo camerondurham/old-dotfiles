@@ -76,7 +76,7 @@ alias \
     web="cd ~/projects/itp303/" \
     os="cd ~/projects/cs350/project-4-cdurham_lee344" \
     osd="cd ~/projects/cs350-docker" \
-    ccd="cd ~/projects/practice/problems" \
+    ccd="cd ~/projects/practice/cp_problems" \
 
 
 
