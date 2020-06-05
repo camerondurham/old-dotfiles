@@ -62,6 +62,11 @@ $ nvim <LEETCODE_DIR>/0982_some_little_problem.cpp
 
 ## Miscellaneous
 
+### env
+
+To properly sign GitHub commits, a GITHUB_TOKEN and HOMEBREW_GITHUB_API_TOKEN (optional) should be provided in ~/dot/env.
+
+
 ### Terminal
 
 I have migrated from `iTerm2` to the much faster and more lightweight `Alacritty`.
