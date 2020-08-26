@@ -59,7 +59,7 @@ set wildignore+=node_modules/*,
 " nnoremap gf :vertical wincmd f<CR>
 
 if g:load_plugins
-source ~/dot/nvim/plugin/plugins.vim
+    source ~/dot/nvim/plugin/plugins.vim
 endif
 
 if g:my_machine
@@ -164,7 +164,7 @@ nnoremap <F12> :exe ':silent !open -a "Google Chrome" %'<CR>
 autocmd FileType * setlocal fo-=c fo-=r fo-=o
 
 " ABBREVIATIONS
-iabbrev @@ polytime@icloud.com
+iabbrev @@ cameronrdurham@gmail.com
 
 
 

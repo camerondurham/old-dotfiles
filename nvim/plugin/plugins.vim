@@ -111,7 +111,7 @@ set hidden
 
 "   IMPORTANT: Required by deoplete/LanguageClient_neovim
 let g:python3_host_prog = '/usr/local/opt/python@3.8/bin/python3.8'
-let g:python_host_prog = '/usr/local/bin/python2'
+let g:python_host_prog = '/usr/bin/python2'
 
 " lang-server: cpp configuration
 " Disable ALE for all LanguageClient clients
@@ -132,7 +132,7 @@ let g:ale_pattern_options = {
             \ '\.h$': {'ale_enabled' : 0},
             \ '\.hpp$': {'ale_enabled' : 0},
             \ '\.rs$':  {'ale_enabled' : 0},
-            \ '\.py$':  {'ale_enabled' : 0},
+            \ '\.py$':  {'ale_enabled' : 1},
             \ '\.md$':  {'ale_enabled' : 0},
             \}
 

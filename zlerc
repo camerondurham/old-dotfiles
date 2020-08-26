@@ -27,23 +27,26 @@ vim_prompt() {
 # branch (sets a green dot) or the number of modified
 # files + if there are untracked files.
 # I forgot where I got this originally but will try to credit!
-
 git_prompt() {
   BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/*\(.*\)/\1/')
-
   # 140 is light magenta
   if [ ! -z $BRANCH ]; then
-    echo -n "%F{$GIT_BRANCH_COLOR}$BRANCH"
+      echo -n "%F{$GIT_BRANCH_COLOR}$BRANCH"
 
-    if [ ! -z "$(git status --short)" ]; then
-        STAGED=$(git status | egrep -c "(modified)|(deleted)|(renamed)|(new file)|(Untracked)")
-        # 146 is light grey/blueish
-        echo " %F{$GIT_CHANGED_COLOR}● %F{$GIT_STAGED_COLOR}($STAGED)"
+      if git status --short 1>/dev/null 2>&1; then
+          num_changes=$(git status --short | wc -l | tr -d ' ')
+
+          if [ "$num_changes" -gt "0" ]; then
+              # 146 is light grey/blueish
+              echo " %F{$GIT_CHANGED_COLOR}● %F{$GIT_STAGED_COLOR}($num_changes)"
           else
               echo " %F{$GIT_CLEAN_COLOR}●"
-    fi
+          fi
+      fi
   fi
 }
+
+
 
 #PS1='
 #$(vim_prompt)%B%F{159}%~$(git_prompt)

@@ -112,7 +112,7 @@ export HUB_CONFIG=${DOTFILES}/hub/config
 export XDG_CONFIG_HOME=${DOTFILES}
 export HOME=~
 export PRACTICE_CPP_LEETCODE=~/projects/practice/cpp/leetcode
-export NOTES_DIR=~/Google\ Drive\ File\ Stream/My\ Drive/notes/
+export NOTES_DIR=~/Nextcloud/notes/
 export CS350_DOCKER_PROJECT=~/projects/cs350/project-4-cdurham_lee344/xv6-public/
 export CP_PRACTICE=~/projects/practice/cp_problems
 export ITP439=~/projects/uscc-camerondurham
@@ -126,7 +126,7 @@ stty -ixon
 export GPG_TTY=$(tty)
 
 # Configure environments that can be CD'd into at all times
-export CDPATH=.:$HOME:~/site:$HOME/projects:$HOME/dot:$HOME/Google\ Drive\ File\ Stream/My\ Drive/notes/:$HOME/projects/practice:
+export CDPATH=.:$HOME:~/site:$HOME/projects:$HOME/dot:$HOME/Nextcloud/notes:$HOME/projects/practice:
 
 # Add my shitty little run script to the path despite it being brittle & lazy
 export PATH="/Users/camerondurham/projects/cs350-docker/run.sh:$PATH"
@@ -205,14 +205,6 @@ ls() {
   else
     ls
   fi
-}
-
-
-site() {
-  pushd ~/site
-  bundle install --quiet
-  bundle exec jekyll serve --quiet --open-url &
-  popd
 }
 
 

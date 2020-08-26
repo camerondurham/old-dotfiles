@@ -6,12 +6,12 @@ Host *
   CheckHostIP no
   EscapeChar C
 
-Host vm
-  HostName 127.0.0.1
-  User trojan
-  Port 3022
+# Host vm
+#   HostName 127.0.0.1
+#   User trojan
+#   Port 3022
 
-Host arch
-  HostName 192.168.1.128
-  User cameron
-  Port 22
+Host pi
+    HostName 192.168.0.2
+    User cam
+    Port 4444

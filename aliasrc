@@ -25,10 +25,13 @@ alias \
     all="docker ps -a -q" \
     python='python3.8 -q' \
     python3='python3.8 -q' \
+    prp='pipenv run python' \
     weather='curl wttr.in' \
     info='info --vi-keys' \
-    tmux="tmux -f ${DOTFILES}/tmuxrc"
-    ta="tmux attach"
+    tmux="tmux -f ${DOTFILES}/tmuxrc" \
+    ta="tmux attach" \
+    ruby="/usr/local/opt/ruby/bin/ruby"
+
 
 
 # Use neovim for vim if present.
@@ -65,9 +68,6 @@ alias \
 	sdn="sudo shutdown -h now" \
 	e="$EDITOR" \
 	v="$EDITOR" \
-
-alias date='date +"%F %T%:z"'
-# e.g. `2019-06-05 13:41:32-07:00`
 
 # SCHOOL SHORTCUTS
 
