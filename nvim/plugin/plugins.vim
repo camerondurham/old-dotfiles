@@ -215,6 +215,7 @@ set noshowmode
 
 
 colorscheme iceberg
+
 let g:lightline = { 'colorscheme': 'icebergDark' }
 
 hi Normal guibg=NONE ctermbg=NONE

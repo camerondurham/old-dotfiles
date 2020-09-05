@@ -30,7 +30,9 @@ alias \
     info='info --vi-keys' \
     tmux="tmux -f ${DOTFILES}/tmuxrc" \
     ta="tmux attach" \
-    ruby="/usr/local/opt/ruby/bin/ruby"
+    ruby="/usr/local/opt/ruby/bin/ruby"\
+    irb="/usr/local/opt/ruby/bin/irb"
+
 
 
 
