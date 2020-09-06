@@ -4,3 +4,6 @@ env
 neofetch
 asciinema/install-id
 nvim/logs/*
+**/node_modules
+configstore/
+shpotify.cfg
