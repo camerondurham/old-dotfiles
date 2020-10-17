@@ -164,10 +164,7 @@ nnoremap <F12> :exe ':silent !open -a "Google Chrome" %'<CR>
 autocmd FileType * setlocal fo-=c fo-=r fo-=o
 
 " ABBREVIATIONS
-iabbrev @@ cameronrdurham@gmail.com
-
-
-
+" iabbrev @@ cameronrdurham@gmail.com
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""

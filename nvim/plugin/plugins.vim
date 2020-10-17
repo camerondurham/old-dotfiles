@@ -13,6 +13,7 @@ call plug#begin('~/dot/nvim/plugged')
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-vinegar'
+Plug 'airblade/vim-rooter'
 Plug 'rust-lang/rust.vim'
 Plug 'dense-analysis/ale'
 
@@ -29,9 +30,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'mileszs/ack.vim'
 
-" Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
+Plug 'morhetz/gruvbox'
+" Plug 'joshdick/onedark.vim'
 Plug 'gkeep/iceberg-dark'
 Plug 'itchyny/lightline.vim'
 Plug 'cocopon/iceberg.vim'
@@ -228,9 +230,12 @@ endif
 set noshowmode
 
 
-colorscheme iceberg
+colorscheme gruvbox
 
-let g:lightline = { 'colorscheme': 'icebergDark' }
+" :h g:lightline.colorscheme
+" let g:lightline = { 'colorscheme': 'icebergDark' }
+" let g:lightline = { 'colorscheme': 'onedark' }
+let g:lightline = { 'colorscheme': 'gruvbox' }
 
 hi Normal guibg=NONE ctermbg=NONE
 
