@@ -155,7 +155,7 @@ map <leader>o :setlocal spell! spelllang=en_us<CR>
 nnoremap <leader>= <C-w>=
 
 " Open current file in chrome
-nnoremap <F12> :exe ':silent !open -a "Google Chrome" %'<CR>
+nnoremap <F12> :exe ':silent !open -a "Firefox Nightly" %'<CR>
 
 
 " Set 'formatoptions' (aka 'fo') to break comment lines but not other lines

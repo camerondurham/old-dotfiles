@@ -7,3 +7,5 @@ nvim/logs/*
 **/node_modules
 configstore/
 shpotify.cfg
+coc/
+nvim/autoload/*.vim

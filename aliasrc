@@ -81,12 +81,19 @@ alias \
     ccd="cd ~/projects/practice/cp_problems" \
 
 
-
 # DEVELOPMENT
 
 # dump todo lists into a folder
 # TODO: make into a script
 alias todo='grep -Ri "todo[:\ ]" .'
+
+# Rust work
+alias \
+    pg='cd ~/Desktop/playground/' \
+    lcc='cd ~/projects/challenge/sept_challenge' \
+    trie='cd ~/projects/trie-hard/' \
+
+
 
 # start cs-104 docker env in cs104 directory and start working in /home/work
 alias cpup='docker run -ti -v "$HOME/cs104/":/home/work -w /home/work/ csci104 /bin/bash'
