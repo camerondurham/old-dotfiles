@@ -134,6 +134,10 @@ export PATH="/Users/camerondurham/projects/cs350-docker/run.sh:$PATH"
 export PATH="/usr/local/anaconda3/bin:$PATH"
 # Add ruby to path
 export PATH="/Users/camerondurham/.gem/ruby/2.6.0/bin:$PATH"
+
+# Add gopath to path
+export PATH="$HOME/go/bin:$PATH"
+
 # Add rust to system path
 export PATH="$HOME/.cargo/bin:$PATH"
 # Add Rust completion engine RACER to path
@@ -248,6 +252,33 @@ g() {
   else
     git status
   fi
+}
+
+export NOTES=$HOME/Nextcloud/notes
+
+# todo today
+tt() {
+    local datefmt
+    datefmt=$(date +"%Y-%m-%d")
+    local notespath
+    notespath=${NOTES:-$backup_notes_path}
+    local filename
+    filename="TODO_$datefmt.md"
+    filepath="$notespath/$filename"
+    vim "$filepath"
+}
+
+export SNIP=$NOTES/useful-snippets.md
+
+# snippets
+
+ss() {
+    if [[ ! -z "$NOTES" ]] && [[ ! -z "$SNIP" ]]; then
+        vim "$SNIP"
+        echo "edited snippets: $SNIP"
+    else
+        echo "NOTES envvar not set, cannot edit snippets!"
+    fi
 }
 
 

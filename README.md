@@ -59,6 +59,9 @@ $ cp <LEETCODE_DIR>/leetcode_template.cpp <LEETCODE_DIR>/0982_some_little_proble
 $ nvim <LEETCODE_DIR>/0982_some_little_problem.cpp
 ```
 
+Additional utilities for **taking daily todo notes** are included in `zshrc`:
+- `tt()` make timestamped todo note in folder (it's my Nextcloud sync folder for me)
+- `ss()` add to my snippets markdown file
 
 ## Miscellaneous
 
