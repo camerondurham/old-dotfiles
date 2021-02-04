@@ -256,8 +256,9 @@ g() {
 
 export NOTES=$HOME/Nextcloud/notes
 
-# todo today
-tt() {
+# get filename for today's notes
+# open in other editors with `code $(ttf)`
+ttf() {
     local datefmt
     datefmt=$(date +"%Y-%m-%d")
     local notespath
@@ -266,6 +267,14 @@ tt() {
     filename="TODO_$datefmt.md"
     filepath="$notespath/$filename"
     nvim "$filepath"
+    echo "$filepath"
+}
+
+# todo today
+tt() {
+    local filepath
+    filepath=$(ttf)
+    vim "$filepath"
 }
 
 export SNIP=$NOTES/useful-snippets.md
