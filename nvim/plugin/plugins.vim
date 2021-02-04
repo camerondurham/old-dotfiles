@@ -16,6 +16,7 @@ Plug 'tpope/vim-vinegar'
 Plug 'airblade/vim-rooter'
 Plug 'rust-lang/rust.vim'
 Plug 'dense-analysis/ale'
+Plug 'wakatime/vim-wakatime'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 

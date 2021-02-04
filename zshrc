@@ -265,7 +265,7 @@ tt() {
     local filename
     filename="TODO_$datefmt.md"
     filepath="$notespath/$filename"
-    vim "$filepath"
+    nvim "$filepath"
 }
 
 export SNIP=$NOTES/useful-snippets.md
@@ -274,7 +274,7 @@ export SNIP=$NOTES/useful-snippets.md
 
 ss() {
     if [[ ! -z "$NOTES" ]] && [[ ! -z "$SNIP" ]]; then
-        vim "$SNIP"
+        nvim "$SNIP"
         echo "edited snippets: $SNIP"
     else
         echo "NOTES envvar not set, cannot edit snippets!"
@@ -290,3 +290,4 @@ compdef g=git
 export PATH="/usr/local/share/python/:$PATH"
 export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
+export PATH="$PATH:/Users/camerondurham/ch-darwin-amd64"

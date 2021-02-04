@@ -87,11 +87,18 @@ alias \
 # TODO: make into a script
 alias todo='grep -Ri "todo[:\ ]" .'
 
+# Docker
+alias \
+    dps='docker ps' \
+    prn='docker system prune -f'
+
+
 # Rust work
 alias \
     pg='cd ~/Desktop/playground/' \
-    lcc='cd ~/projects/challenge/sept_challenge' \
-    trie='cd ~/projects/trie-hard/' \
+    lcc='cd ~/projects/challenge/sept_challenge'\
+    box='cd ~/projects/sandbox/rust/'
+
 
 
 
