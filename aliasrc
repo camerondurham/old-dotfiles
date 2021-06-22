@@ -124,3 +124,11 @@ alias supos='docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfin
 alias osup='docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined  -v "$HOME/projects/cs350/":/root -w /root cs350_32 /bin/bash'
 
 alias oshere='docker run -it --cap-add=SYS_PTRACE --security-opt seccomp=unconfined  -v "$(pwd)":/root -w /root cs350_32 /bin/bash'
+
+# docker
+alias d="docker"
+alias stopall="docker stop $(docker ps --format '{{ .ID }}')"
+
+# global
+# alias -g <name>="command"
+# also see https://linuxhint.com/configure-use-aliases-zsh
