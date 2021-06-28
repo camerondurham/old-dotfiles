@@ -68,8 +68,10 @@ PS1='
 $(vim_prompt)%B%F{$DIR_COLOR}%~$(git_prompt)
 %B%F{$PROMPT_COLOR}$PRETTY_PROMPT_CHAR %F{reset}'
 
-# Ultimate power move prompt see https://github.com/katef
-PS1_ULTIMATE=';'
+# inspired by https://github.com/katef
+# ---------- zsh prompt
+# $'\n' forces new line
+PS2="%1~"$'\n'"; "
 
 # Configure keybindings
 
